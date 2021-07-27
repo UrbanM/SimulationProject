@@ -31,6 +31,7 @@ def main():
 	# visualize("all_comp.obj", fname1="rad_comp2.obj", fname2="tan_comp2.obj", fname3="ver_comp.obj",
 	# 		labels=["all", "rad", "tan", "ver"])
 	visualize2("test.obj", labels=["tan"])
+	test
 
 	return
 
