@@ -26,9 +26,11 @@ import megtools.pyread_biosig as pbio
 
 
 def main():
-	# simulate("test.obj", components=["rad", "tan", "ver"])
-	visualize("all_comp_0room_spont-ng.obj", fname1="rad_comp_0room_spont-ng.obj", fname2="tan_comp_0room_spont-ng.obj", fname3="ver_comp_0room_spont-ng.obj",
-			labels=["all", "rad", "tan", "ver"])
+	# simulate("test.obj", components=["tan"])
+	# test("test.obj")
+	# visualize("all_comp.obj", fname1="rad_comp2.obj", fname2="tan_comp2.obj", fname3="ver_comp.obj",
+	# 		labels=["all", "rad", "tan", "ver"])
+	visualize2("test.obj", labels=["tan"])
 
 	return
 
@@ -77,15 +79,22 @@ def simulate(filename="default", components=["rad", "tan", "ver"]):
 
 		pos = "both"
 
-		number_of_noises = 100
+		number_of_noises = 4
 
 		avg_dists = []
 		rel_err_avgs = []
 		corr_coeff_avgs = []
 		noises = []
 		spont_noises_list = []
+		snrs_avgs = []
+		snr_dbs_avgs = []
+
+		dists = []
+		rel_errs = []
+		corr_coeffs = []
 		snrs = []
 		snr_dbs = []
+
 		name = block_name_opm[0:4]
 
 		src_path = standard_path + '/MNE/' + name + '/' + name + '-oct6-src.fif'
@@ -100,10 +109,10 @@ def simulate(filename="default", components=["rad", "tan", "ver"]):
 		# bem = mne.make_sphere_model(r0=center)
 
 		# for i in range(0, 200, 25):
-		for i in range(80, 100, 20):
-			noise_std = float(i) * 1.0 * 10 ** (-15)
-			for i in range(5, 10, 5):
-				spont_nois_dip = float(i) * 1.0 * 10 ** (-9)
+		for ii in range(0, 25, 25):
+			noise_std = float(ii) * 1.0 * 10 ** (-15)
+			for iii in range(0, 10, 5):
+				spont_nois_dip = float(iii) * 1.0 * 10 ** (-9)
 
 				evoked_opm, dip_sim = simulate_aef_opm_mnepython(standard_path, block_name_opm, freesurfer_path,
 																 position=pos, gen12=gen12s[j], no_noises=number_of_noises,
@@ -114,46 +123,56 @@ def simulate(filename="default", components=["rad", "tan", "ver"]):
 				evoked_opm_noised2, spont_noises = add_noise_spontanous(evoked_opm_noised, spont_nois_dip, evoked_opm.times,
 																		standard_path, name, bem=bem, src=src)
 
-				plot_evokedobj_topo_v3(evoked_opm, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
-				plt.savefig("evo_no_noise.png")
-				plot_evokedobj_topo_v3(evoked_opm_noised, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
-				plt.savefig("evo_room_noise.png")
-				plot_evokedobj_topo_v3(evoked_opm_noised2, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
-				plt.savefig("evo_spont_noise.png")
-				plot_evokedobj_topo_v3(spont_noises, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
-				plt.savefig("spont_noise.png")
-				plot_evokedobj_topo_v3(random_noises, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
-				plt.savefig("rand_noise.png")
-				plt.show()
+				# plot_evokedobj_topo_v3(evoked_opm, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
+				# plot_evokedobj_topo_v3(evoked_opm_noised2, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
+				# plt.show()
 
 				fit_dip_opm, recon_field_opm = localize_dip(evoked_opm_noised2, standard_path, name, freesurfer_path,
 															dip_sim, "OPM", bem=bem)
 
 				dist, avg_dist = dipole_distance(dip_sim, fit_dip_opm)
 				rel_err, corr_coeff, rel_err_avg, corr_coeff_avg = recc_two_evoked(evoked_opm_noised, recon_field_opm)
-				SNR_db, SNR = estimate_snr(evoked_opm, [random_noises, spont_noises])
+				SNR_db_avgs, SNR_avgs, SNR_db, SNR = estimate_snr(evoked_opm, [random_noises, spont_noises])
 
-				# avg_dist = 0.0
-				# rel_err_avg = 0.0
+				# avg_dist = 1.0
+				# rel_err_avg = 1.0
 				# corr_coeff_avg = 1.0
-				# SNR = 0.0
-				# SNR_db = 0.0
+				# SNR_avgs = 1.0
+				# SNR_db_avgs = 1.0
+
+				# dist = np.ones(number_of_noises)
+				# rel_err = np.ones(number_of_noises)
+				# corr_coeff = np.ones(number_of_noises)
 
 				avg_dists.append(avg_dist)
 				rel_err_avgs.append(rel_err_avg)
 				corr_coeff_avgs.append(corr_coeff_avg)
 				noises.append(noise_std)
 				spont_noises_list.append(spont_nois_dip)
+				snrs_avgs.append(SNR_avgs)
+				snr_dbs_avgs.append(SNR_db_avgs)
+
+				dists.append(dist)
+				rel_errs.append(rel_err)
+				corr_coeffs.append(corr_coeff)
 				snrs.append(SNR)
 				snr_dbs.append(SNR_db)
+				# snrs = []
+				# snr_dbs = []
+
+		avg_stat.add_dists(dists)
+		avg_stat.add_res(rel_errs)
+		avg_stat.add_ccs(corr_coeffs)
+		avg_stat.add_snrs(snrs)
+		avg_stat.add_snr_dbs(snr_dbs)
 
 		avg_stat.add_avgdist(avg_dists)
 		avg_stat.add_avgcc(corr_coeff_avgs)
 		avg_stat.add_avgre(rel_err_avgs)
 		avg_stat.add_noisestr(noises)
 		avg_stat.add_spontnoise(spont_noises_list)
-		avg_stat.add_snr(snrs)
-		avg_stat.add_snrdb(snr_dbs)
+		avg_stat.add_avgsnr(snrs_avgs)
+		avg_stat.add_avgsnrdb(snr_dbs_avgs)
 
 	avg_stat.calc_avgs()
 	avg_stat.calc_stds()
@@ -161,8 +180,68 @@ def simulate(filename="default", components=["rad", "tan", "ver"]):
 
 	return 0
 
+def test(fname, fname1=None, fname2=None, fname3=None, labels=["empty", "empty", "empty", "empty"]):
+	import matplotlib.pyplot as plt
+	obj = read_obj(fname)
+	obj.calc_avgs()
+	obj.calc_stds()
+
+	return
+
 
 def visualize(fname, fname1=None, fname2=None, fname3=None, labels=["empty", "empty", "empty", "empty"]):
+	import matplotlib.pyplot as plt
+	obj = read_obj(fname)
+	obj.calc_avgs()
+	obj.calc_stds()
+
+	if isinstance(fname1, str):
+		obj1 = read_obj(fname1)
+		obj1.calc_avgs()
+		obj1.calc_stds()
+
+	if isinstance(fname2, str):
+		obj2 = read_obj(fname2)
+		obj2.calc_avgs()
+		obj2.calc_stds()
+
+	if isinstance(fname3, str):
+		obj3 = read_obj(fname3)
+		obj3.calc_avgs()
+		obj3.calc_stds()
+
+	fig1, ax1 = plot_one_var(obj.noisestr, obj.avg_avgcc, yerr=obj.std_avgcc, xname="$\sigma \mathrm{[fT]}$", yname="$\mathrm{CC}$", xscale=10**15, label_name=labels[0] + " components", legend=True)
+	fig2, ax2 = plot_one_var(obj.noisestr, obj.avg_avgre, yerr=obj.std_avgre, xname="$\sigma \mathrm{[fT]}$", yname="$\mathrm{RE}$", xscale=10**15, label_name=labels[0] + " components", legend=True)
+	fig3, ax3 = plot_one_var(obj.noisestr, obj.avg_avgdist, yerr=obj.std_avgdist, xname="$\sigma \mathrm{[fT]}$", yname="$d(p1, p2) \mathrm{[mm]}$", xscale=10**15, yscale=10**3, label_name=labels[0] + " components", legend=True)
+	fig4, ax4 = plot_one_var(obj.noisestr, obj.avg_snr, yerr=obj.std_snr, xname="$\sigma \mathrm{[fT]}$", yname="$\mathrm{SNR}$", xscale=10 ** 15, label_name=labels[0] + " components", legend=True)
+
+	if isinstance(fname1, str):
+		add_one_var_fig(fig1, ax1, obj1.noisestr, obj1.avg_avgcc, yerr=obj1.std_avgcc, xscale=10**15, color="red", label_name=labels[1] + " components", legend=True)
+		add_one_var_fig(fig2, ax2, obj1.noisestr, obj1.avg_avgre, yerr=obj1.std_avgre, xscale=10**15, color="red", label_name=labels[1] + " components", legend=True)
+		add_one_var_fig(fig3, ax3, obj1.noisestr, obj1.avg_avgdist, yerr=obj1.std_avgdist, xscale=10**15, yscale=10**3, color="red", label_name=labels[1] + " components", legend=True)
+		add_one_var_fig(fig4, ax4, obj1.noisestr, obj1.avg_snr, yerr=obj1.std_snr, xscale=10**15, color="red", label_name=labels[1] + " components", legend=True)
+
+	if isinstance(fname2, str):
+		add_one_var_fig(fig1, ax1, obj2.noisestr, obj2.avg_avgcc, yerr=obj2.std_avgcc, xscale=10**15, color="blue", label_name=labels[2] + " components", legend=True)
+		add_one_var_fig(fig2, ax2, obj2.noisestr, obj2.avg_avgre, yerr=obj2.std_avgre, xscale=10**15, color="blue", label_name=labels[2] + " components", legend=True)
+		add_one_var_fig(fig3, ax3, obj2.noisestr, obj2.avg_avgdist, yerr=obj2.std_avgdist, xscale=10**15, yscale=10**3, color="blue", label_name=labels[2] + " components", legend=True)
+		add_one_var_fig(fig4, ax4, obj2.noisestr, obj2.avg_snr, yerr=obj2.std_snr, xscale=10**15, color="blue", label_name=labels[2] + " components", legend=True)
+
+	if isinstance(fname3, str):
+		add_one_var_fig(fig1, ax1, obj3.noisestr, obj3.avg_avgcc, yerr=obj3.std_avgcc, xscale=10**15, color="green",
+						label_name=labels[3] + " components", legend=True, savefig=labels[0] + "_components_cc.png")
+		add_one_var_fig(fig2, ax2, obj3.noisestr, obj3.avg_avgre, yerr=obj3.std_avgre, xscale=10**15, color="green",
+						label_name=labels[3] + " components", legend=True, savefig=labels[0] + "_components_re.png")
+		add_one_var_fig(fig3, ax3, obj3.noisestr, obj3.avg_avgdist, yerr=obj3.std_avgdist, xscale=10**15, yscale=10**3,
+						color="green", label_name=labels[3] + " components", legend=True, savefig=labels[0] + "_components_dist.png")
+		add_one_var_fig(fig4, ax4, obj3.noisestr, obj3.avg_snr, yerr=obj3.std_snr, xscale=10**15, color="green",
+						label_name=labels[3] + " components", legend=True, savefig=labels[0] + "_components_snr.png")
+
+	plt.show()
+
+	return
+
+def visualize2(fname, fname1=None, fname2=None, fname3=None, labels=["empty", "empty", "empty", "empty"]):
 	import matplotlib.pyplot as plt
 	obj = read_obj(fname)
 	obj.calc_avgs()
@@ -240,10 +319,16 @@ def estimate_snr(evoked_sig, evoked_noise, noise_times=[], signal_times=[]):
 	rms_signal = np.sqrt(np.mean(np.square(evoked1.data)))
 	rms_noise = np.sqrt(np.mean(np.square(evoked2.data)))
 
+	rms_signal_nonavg = np.sqrt(np.square(evoked1.data))
+	rms_noise_nonavg = np.sqrt(np.square(evoked2.data))
+
 	SNR_db = 20*np.log10(rms_signal/rms_noise)
 	SNR = rms_signal / rms_noise
 
-	return SNR_db, SNR
+	SNR_db_nonavg = np.mean(20*np.log10(rms_signal_nonavg/rms_noise_nonavg), axis=0)
+	SNR_nonavg = np.mean(rms_signal_nonavg / rms_noise_nonavg, axis=0)
+
+	return SNR_db, SNR, SNR_db_nonavg, SNR_nonavg
 
 
 def recc_two_evoked(evoked_1, evoked_2):
@@ -311,7 +396,7 @@ def add_noise_spontanous(evoked, dip_str, times, standard_path, name, no_dip=100
 	dipoles = mne.Dipole(dip_times, dip_loc[:,0:3], dip_str, dip_loc[:,3:6], 1)
 
 
-	plot_dipoles(dip_loc[np.where(dip_times==0.0)[0].tolist()], subject_dir, name, savefig="spontanous_dipoles.png")
+	plot_dipoles(dip_loc[np.where(dip_times==0.0)[0].tolist()], subject_dir, name)
 
 
 	with mne.use_coil_def(coil_def_fname):
@@ -480,11 +565,11 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 	# label_names = ['G_temp_sup-G_T_transv-rh']
 	# aud_labels = [label for label in labels if label.name in label_names]
 
-	if src == None:
+	if src is None:
 		src_path = standard_path + '/MNE/' + name + '/' + name + '-oct6-src.fif'
 		src = mne.read_source_spaces(src_path)
 
-	if bem==None:
+	if bem is None:
 		bem = standard_path + '/MNE/' + name + '/' + name + '-5120-5120-5120-bem-sol.fif'
 
 	xyz1 = import_sensor_pos_ori_all(sensorholder_path, name, subject_dir, gen12=gen12)
@@ -514,15 +599,13 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 
 	times = np.arange(no_noises, dtype=float) * 0.02
 
-	max_dip = 100.0 * 10 **(-9)
+	max_dip = 100.0 * 10 ** (-9)
 
 	dip_loc, dip_str = generate_dip(src, times, max_dip)
 
 	# plot_dipoles(xyz,dip_loc,subject_dir, name)
 
 	dip = mne.Dipole(np.array(times), dip_loc[:,0:3], dip_str, dip_loc[:,3:6], 1)
-
-	plot_dipoles(dip_loc[np.where(times == 0.0)[0].tolist()], subject_dir, name, savefig="simulated_dip.png")
 
 	coil_def_fname = 'data/coil_def.dat'
 	with mne.use_coil_def(coil_def_fname):
@@ -532,7 +615,7 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 	return evoked, dip
 
 
-def plot_dipoles(dip, subject_dir, name, savefig=None):
+def plot_dipoles(dip, subject_dir, name):
 	import os
 	import megtools.my3Dplot as m3p
 	surface1 = os.path.join(subject_dir, name, 'bem', 'watershed', name + '_inner_skull_surface')
@@ -555,11 +638,8 @@ def plot_dipoles(dip, subject_dir, name, savefig=None):
 
 	# p1.show(screenshot=name + 'opm_rad.png')
 	# p1 = m3p.plot_sensors_pyvista(surfaces, sensors=[])
-
-	if isinstance(savefig, str):
-		p1.show(screenshot=savefig)
-	else:
-		p1.show()
+	p1.show(screenshot='1_dipoles_rand.png')
+	# p1.show()
 
 	return
 
@@ -1414,14 +1494,23 @@ def import_sensor_pos_squid2(template_path, fwd_squid_path, fname_trans_squid, n
 class AvgStatistics:
 	def __init__(self):
 		import numpy as np
-		self.names = np.array(())
+
+		self.dist = np.array(()) #Array of all distances
+		self.cc = np.array(()) #Array of all ccs
+		self.re = np.array(())  #Array of all res
+		self.snr = np.array(()) #Array of all snrs
+		self.snrdb = np.array(()) #Array of all snrdbs
+
+		self.names = np.array(()) #Array of all names
 		self.avgdist = np.array(())
 		self.avgcc = np.array(())
 		self.avgre = np.array(())
-		self.snr = np.array(())
-		self.snrdb = np.array(())
+		self.avgsnr = np.array(())
+		self.avgsnrdb = np.array(())
+
 		self.noisestr = np.array(())
 		self.spontnoise = np.array(())
+
 		self.avg_avgdist = 0
 		self.avg_avgcc = 0
 		self.avg_avgre = 0
@@ -1433,9 +1522,38 @@ class AvgStatistics:
 		self.std_snr = 0
 		self.std_snrdb = 0
 
-
 	def add_names(self, names):
 		self.names = names
+
+	def add_dists(self, values_arr):
+		if len(self.dist) == 0:
+			self.dist = np.array([values_arr])
+		else:
+			self.dist = np.append(self.dist, np.array([values_arr]), axis=0)
+
+	def add_ccs(self, values_arr):
+		if len(self.avgcc) == 0:
+			self.cc = np.array([values_arr])
+		else:
+			self.cc = np.append(self.cc, np.array([values_arr]), axis=0)
+
+	def add_res(self, values_arr):
+		if len(self.avgre) == 0:
+			self.re = np.array([values_arr])
+		else:
+			self.re = np.append(self.re, np.array([values_arr]), axis=0)
+
+	def add_snrs(self, values_arr):
+		if len(self.snr) == 0:
+			self.snr = np.array([values_arr])
+		else:
+			self.snr = np.append(self.snr, np.array([values_arr]), axis=0)
+
+	def add_snr_dbs(self, values_arr):
+		if len(self.snrdb) == 0:
+			self.snrdb = np.array([values_arr])
+		else:
+			self.snrdb = np.append(self.snrdb, np.array([values_arr]), axis=0)
 
 	def add_avgdist(self, values_arr):
 		if len(self.avgdist) == 0:
@@ -1455,17 +1573,17 @@ class AvgStatistics:
 		else:
 			self.avgre = np.append(self.avgre, np.array([values_arr]), axis=0)
 
-	def add_snr(self, values_arr):
-		if len(self.snr) == 0:
-			self.snr = np.array([values_arr])
+	def add_avgsnr(self, values_arr):
+		if len(self.avgsnr) == 0:
+			self.avgsnr = np.array([values_arr])
 		else:
-			self.snr = np.append(self.snr, np.array([values_arr]), axis=0)
+			self.avgsnr = np.append(self.avgsnr, np.array([values_arr]), axis=0)
 
-	def add_snrdb(self, values_arr):
-		if len(self.snrdb) == 0:
-			self.snrdb = np.array([values_arr])
+	def add_avgsnrdb(self, values_arr):
+		if len(self.avgsnrdb) == 0:
+			self.avgsnrdb = np.array([values_arr])
 		else:
-			self.snrdb = np.append(self.snrdb, np.array([values_arr]), axis=0)
+			self.avgsnrdb = np.append(self.avgsnrdb, np.array([values_arr]), axis=0)
 
 	def add_noisestr(self, values_arr):
 		self.noisestr = np.array(values_arr)
@@ -1477,15 +1595,15 @@ class AvgStatistics:
 		self.avg_avgdist = np.average(self.avgdist, axis=0)
 		self.avg_avgcc = np.average(self.avgcc, axis=0)
 		self.avg_avgre = np.average(self.avgre, axis=0)
-		self.avg_snr = np.average(self.snr, axis=0)
-		self.avg_snrdb = np.average(self.snrdb, axis=0)
+		self.avg_snr = np.average(self.avgsnr, axis=0)
+		self.avg_snrdb = np.average(self.avgsnrdb, axis=0)
 
 	def calc_stds(self):
 		self.std_avgdist = np.std(self.avgdist, axis=0)
 		self.std_avgcc = np.std(self.avgcc, axis=0)
 		self.std_avgre = np.std(self.avgre, axis=0)
-		self.std_snr = np.std(self.snr, axis=0)
-		self.std_snrdb = np.std(self.snrdb, axis=0)
+		self.std_snr = np.std(self.avgsnr, axis=0)
+		self.std_snrdb = np.std(self.avgsnrdb, axis=0)
 
 	def save_obj(self, file_path):
 		import pickle
