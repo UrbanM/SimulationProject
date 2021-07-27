@@ -396,7 +396,7 @@ def add_noise_spontanous(evoked, dip_str, times, standard_path, name, no_dip=100
 	dipoles = mne.Dipole(dip_times, dip_loc[:,0:3], dip_str, dip_loc[:,3:6], 1)
 
 
-	plot_dipoles(dip_loc[np.where(dip_times==0.0)[0].tolist()], subject_dir, name)
+	plot_dipoles(dip_loc[np.where(dip_times==0.0)[0].tolist()], subject_dir, name, savefig="spontanous_dipoles.png")
 
 
 	with mne.use_coil_def(coil_def_fname):
@@ -607,6 +607,8 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 
 	dip = mne.Dipole(np.array(times), dip_loc[:,0:3], dip_str, dip_loc[:,3:6], 1)
 
+	plot_dipoles(dip_loc[np.where(times == 0.0)[0].tolist()], subject_dir, name, savefig="simulated_dip.png")
+
 	coil_def_fname = 'data/coil_def.dat'
 	with mne.use_coil_def(coil_def_fname):
 		fwd_dip, stc_dip = mne.make_forward_dipole(dip, bem, info, trans=None)
@@ -615,7 +617,7 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 	return evoked, dip
 
 
-def plot_dipoles(dip, subject_dir, name):
+def plot_dipoles(dip, subject_dir, name, savefig=None):
 	import os
 	import megtools.my3Dplot as m3p
 	surface1 = os.path.join(subject_dir, name, 'bem', 'watershed', name + '_inner_skull_surface')
@@ -638,7 +640,10 @@ def plot_dipoles(dip, subject_dir, name):
 
 	# p1.show(screenshot=name + 'opm_rad.png')
 	# p1 = m3p.plot_sensors_pyvista(surfaces, sensors=[])
-	p1.show(screenshot='1_dipoles_rand.png')
+-	if isinstance(savefig, str):
+-		p1.show(screenshot=savefig)
+-	else:
+-		p1.show()
 	# p1.show()
 
 	return
