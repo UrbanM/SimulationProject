@@ -1,0 +1,9 @@
+[name]
+d_alpha d_beta d_gama
+d_x d_y d_z
+tisa
+0.0 0.0 -6.0
+3.8 -5.3 -32.8
+urma
+8.0 0.0 0.0
+3.8 -12.2 -42.4
