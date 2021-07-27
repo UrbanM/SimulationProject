@@ -31,7 +31,6 @@ def main():
 	# visualize("all_comp.obj", fname1="rad_comp2.obj", fname2="tan_comp2.obj", fname3="ver_comp.obj",
 	# 		labels=["all", "rad", "tan", "ver"])
 	visualize2("test.obj", labels=["tan"])
-	test
 
 	return
 
@@ -110,9 +109,9 @@ def simulate(filename="default", components=["rad", "tan", "ver"]):
 		# bem = mne.make_sphere_model(r0=center)
 
 		# for i in range(0, 200, 25):
-		for ii in range(0, 25, 25):
+		for ii in range(0, 200, 25):
 			noise_std = float(ii) * 1.0 * 10 ** (-15)
-			for iii in range(0, 10, 5):
+			for iii in range(0, 5, 5):
 				spont_nois_dip = float(iii) * 1.0 * 10 ** (-9)
 
 				evoked_opm, dip_sim = simulate_aef_opm_mnepython(standard_path, block_name_opm, freesurfer_path,
@@ -641,10 +640,10 @@ def plot_dipoles(dip, subject_dir, name, savefig=None):
 
 	# p1.show(screenshot=name + 'opm_rad.png')
 	# p1 = m3p.plot_sensors_pyvista(surfaces, sensors=[])
--	if isinstance(savefig, str):
--		p1.show(screenshot=savefig)
--	else:
--		p1.show()
+	if isinstance(savefig, str):
+		p1.show(screenshot=savefig)
+	else:
+		p1.show()
 	# p1.show()
 
 	return
