@@ -22,70 +22,25 @@ import random
 
 
 def main():
-    # simulate_rms("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"])
-    # simulate("test-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"])
+    simulate_rms("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad"])
+    # simulate_rms("test.obj", system_glob="SQUID", magnetometer_type=1)
+
+    # simulate("simulate2808-snr-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"])
+
+    # simulate("simulate2808-squid1-std.obj", system_glob="SQUID", magnetometer_type=1)
+    # simulate("simulate2808-squid2-std.obj", system_glob="SQUID", magnetometer_type=2)
+    # simulate("simulate2808-squid3-std.obj", system_glob="SQUID", magnetometer_type=3)
+    # simulate("simulate2808-squid4-std.obj", system_glob="SQUID", magnetometer_type=4)
+    # simulate("simulate2808-squid5-std.obj", system_glob="SQUID", magnetometer_type=5)
+    # simulate("simulate2808-squid6-std.obj", system_glob="SQUID", magnetometer_type=6)
+
     # simulate("test.obj", system_glob="SQUID", magnetometer_type=6, n_jobs=1)
     # simulate("simulate2508-squid1.obj", system_glob="SQUID", magnetometer_type=1, n_jobs=1)
-    simulate("simulate2708-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], n_jobs=1)
+
+    # simulate("simulate2708-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], n_jobs=1)
+    # simulate("simulate2508-squid1.obj", system_glob="SQUID", magnetometer_type=1, n_jobs=1)
 
     # test("simulate3007-rad-bak.obj")
-
-    # plot_contour("simulate3007-all-bak.obj", fname1="simulate3007-rad-bak.obj", fname2="simulate3007-tan-bak.obj",
-    #             fname3="simulate3007-ver-bak.obj", labels=["all", "rad", "tan", "ver"])
-    # visualize("simulate2707-all.obj", fname1="simulate2707-rad.obj", fname2="simulate2707-tan.obj",
-    #           fname3="simulate2707-ver.obj", labels=["all", "rad", "tan", "ver"])
-
-    # visualize("simulate2707-all.obj", fname1="simulate2707-rad.obj", fname2="simulate2707-tan.obj",
-    #           fname3="simulate2707-ver.obj", labels=["all", "rad", "tan", "ver"])
-
-    # visualize3("test.obj")
-
-    # visualize("simulate1608,1908-squid1.obj", fname1="simulate1608,1908-squid2.obj", fname2="simulate1608,1908-squid3.obj",
-    #           fname3="simulate1608,1908-squid4.obj", fname4="simulate1608,1908-squid5.obj",
-    #           fname5="simulate1608,1908-squid6.obj", labels=["axial gradiometer", "magnetometer (rad.)",
-    #           "planar gradiometer (lat.)", "planar gradiometer (long.)", "magnetometer (tan. lat.)",
-    #                                                          "magnetometer (tan. long.)"])
-
-    # visualize3("simulate2508-squid1.obj", fname1="simulate2508-squid2.obj", fname2="simulate2508-squid3.obj",
-    #           fname3="simulate2508-squid4.obj", fname4="simulate2508-squid5.obj",
-    #           fname5="simulate2508-squid6.obj", labels=["axial gradiometer", "magnetometer (rad.)",
-    #           "planar gradiometer (lat.)", "planar gradiometer (long.)", "magnetometer (tan. lat.)",
-    #                                                          "magnetometer (tan. long.)"])
-
-    # visualize2("simulate1708-squid1.obj", fname1="simulate1708-squid2.obj", fname2="simulate1708-squid3.obj",
-    #           fname3="simulate1708-squid4.obj", fname4="simulate1708-squid5.obj",
-    #           fname5="simulate1708-squid6.obj", labels=["axial gradiometer", "magnetometer (rad.)",
-    #           "planar gradiometer (lat.)", "planar gradiometer (long.)", "magnetometer (tan. lat.)",
-    #                                                          "magnetometer (tan. long.)"])
-
-    # visualize_relative("simulate2508-all-relative.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
-    #           fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"])
-
-    # visualize_relative("simulate2508-all-relative.obj", labels=["all"])
-    # test("simulate3007,1908-all.obj")
-
-
-    #
-    # merge_two("simulate1608-squid1.obj", "simulate1908-squid1.obj", "simulate1608,1908-squid1.obj")
-    # merge_two("simulate1608-squid2.obj", "simulate1908-squid2.obj", "simulate1608,1908-squid2.obj")
-    # merge_two("simulate1608-squid3.obj", "simulate1908-squid3.obj", "simulate1608,1908-squid3.obj")
-    # merge_two("simulate1608-squid4.obj", "simulate1908-squid4.obj", "simulate1608,1908-squid4.obj")
-    # merge_two("simulate1608-squid5.obj", "simulate1908-squid5.obj", "simulate1608,1908-squid5.obj")
-    # merge_two("simulate1608-squid6.obj", "simulate1908-squid6.obj", "simulate1608,1908-squid6.obj")
-
-    # merge_two("simulate3007-all.obj", "simulate1908-all.obj", "simulate3007,1908-all.obj")
-    # merge_two("simulate3007-rad.obj", "simulate1908-rad.obj", "simulate3007,1908-rad.obj")
-    # merge_two("simulate3007-tan.obj", "simulate1908-tan.obj", "simulate3007,1908-tan.obj")
-    # merge_two("simulate3007-ver.obj", "simulate1908-ver.obj", "simulate3007,1908-ver.obj")
-
-    # plot_contour("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
-    #             fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"], parameter="snr")
-
-    # visualize4("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
-    #            fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"])
-
-
-    # visualize("test.obj", labels=["ver"])
 
     return
 
@@ -112,55 +67,71 @@ def visualize_relative(fname, fname1=None, fname2=None, fname3=None, labels=["em
         obj3.calc_stds()
 
     # xscale = 10 ** 15
+    relative_x = 7.5 * 10 ** (-14.0)
     xscale = 1
+    ratios = np.array(obj.noisestr[0]) / relative_x
     # xname = "$\sigma \mathrm{[fT]}$"
     # xname = "$ SNR   \mathrm{[dB]}$"
     xname = "ratio"
 
-    fig1, ax1 = plot_one_var(obj.noisestr[0], obj.avg_avgcc, yerr=obj.std_avgcc, xname=xname, yname="$\mathrm{CC}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
-    fig2, ax2 = plot_one_var(obj.noisestr[0], obj.avg_avgre, yerr=obj.std_avgre, xname=xname, yname="$\mathrm{RE}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
-    fig3, ax3 = plot_one_var(obj.noisestr[0], obj.avg_avgdist, yerr=obj.std_avgdist, xname=xname,
+    # fig1, ax1 = plot_one_var(obj.noisestr[0], obj.avg_avgcc, yerr=obj.std_avgcc, xname=xname, yname="$\mathrm{CC}$",
+    #                          xscale=xscale, label_name=labels[0], legend=True)
+    # fig2, ax2 = plot_one_var(obj.noisestr[0], obj.avg_avgre, yerr=obj.std_avgre, xname=xname, yname="$\mathrm{RE}$",
+    #                          xscale=xscale, label_name=labels[0], legend=True)
+    fig3, ax3 = plot_one_var(ratios, obj.avg_avgdist, yerr=obj.std_avgdist, xname=xname,
                              yname="$d(p1, p2) \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
                              label_name=labels[0], legend=True)
-    fig4, ax4 = plot_one_var(obj.noisestr[0], obj.avg_snr, yerr=obj.std_snr, xname=xname, yname="$\mathrm{SNR}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+    # fig4, ax4 = plot_one_var(obj.noisestr[0], obj.avg_snr, yerr=obj.std_snr, xname=xname, yname="$\mathrm{SNR}$",
+    #                          xscale=xscale, label_name=labels[0], legend=True)
 
     if isinstance(fname1, str):
-        res = [idx for idx, val in enumerate(obj.spontnoise[0]) if val == 0.0]
+        res1 = [idx for idx, val in enumerate(obj1.spontnoise[0]) if val == 0.0]
+        res2 = [idx for idx, val in enumerate(obj1.noisestr[0]) if relative_x-(0.01) * 10 ** (-14.0) <= val < relative_x+(0.01) * 10 ** (-14.0)]
 
-        add_one_var_fig(fig1, ax1, obj1.noisestr[0], obj1.avg_avgcc, yerr=obj1.std_avgcc, xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
-        add_one_var_fig(fig2, ax2, obj1.noisestr[0], obj1.avg_avgre, yerr=obj1.std_avgre, xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
-        add_one_var_fig(fig3, ax3, obj1.noisestr[0], obj1.avg_avgdist, yerr=obj1.std_avgdist, xscale=xscale,
-                        yscale=10 ** 3, color="red", label_name=labels[1], legend=True)
-        add_one_var_fig(fig4, ax4, obj1.noisestr[0], obj1.avg_snr, yerr=obj1.std_snr, xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
+        res = [value for value in res1 if value in res2]
+        ax3.hlines(obj1.avg_avgdist[res]*10**3, min(ratios), max(ratios), colors="red", linestyles='solid',
+                   label='radial')
+        ax3.legend()
+
+        #
+        #  add_one_var_fig(fig1, ax1, obj1.noisestr[0], obj1.avg_avgcc, yerr=obj1.std_avgcc, xscale=xscale, color="red",
+        #                  label_name=labels[1], legend=True)
+        #  add_one_var_fig(fig2, ax2, obj1.noisestr[0], obj1.avg_avgre, yerr=obj1.std_avgre, xscale=xscale, color="red",
+        #                  label_name=labels[1], legend=True)
+        # add_one_var_fig(fig3, ax3, obj1.noisestr[0], obj1.avg_avgdist, yerr=obj1.std_avgdist, xscale=xscale,
+        #                 yscale=10 ** 3, color="red", label_name=labels[1], legend=True)
+        # add_one_var_fig(fig4, ax4, obj1.noisestr[0], obj1.avg_snr, yerr=obj1.std_snr, xscale=xscale, color="red",
+        #               label_name=labels[1], legend=True)
 
     if isinstance(fname2, str):
-        add_one_var_fig(fig1, ax1, obj2.noisestr[0], obj2.avg_avgcc, yerr=obj2.std_avgcc, xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
-        add_one_var_fig(fig2, ax2, obj2.noisestr[0], obj2.avg_avgre, yerr=obj2.std_avgre, xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
-        add_one_var_fig(fig3, ax3, obj2.noisestr[0], obj2.avg_avgdist, yerr=obj2.std_avgdist, xscale=xscale,
-                        yscale=10 ** 3, color="blue", label_name=labels[2], legend=True)
-        add_one_var_fig(fig4, ax4, obj2.noisestr[0], obj2.avg_snr, yerr=obj2.std_snr, xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
+        ax3.hlines(obj2.avg_avgdist[res]*10**3, min(ratios), max(ratios), colors="green", linestyles='solid',
+                   label='tangential')
+        ax3.legend()
+        # add_one_var_fig(fig1, ax1, obj2.noisestr[0], obj2.avg_avgcc, yerr=obj2.std_avgcc, xscale=xscale, color="blue",
+        #                 label_name=labels[2], legend=True)
+        # add_one_var_fig(fig2, ax2, obj2.noisestr[0], obj2.avg_avgre, yerr=obj2.std_avgre, xscale=xscale, color="blue",
+        #                 label_name=labels[2], legend=True)
+        # add_one_var_fig(fig3, ax3, obj2.noisestr[0], obj2.avg_avgdist, yerr=obj2.std_avgdist, xscale=xscale,
+        #                 yscale=10 ** 3, color="blue", label_name=labels[2], legend=True)
+        # add_one_var_fig(fig4, ax4, obj2.noisestr[0], obj2.avg_snr, yerr=obj2.std_snr, xscale=xscale, color="blue",
+        #                 label_name=labels[2], legend=True)
 
     if isinstance(fname3, str):
-        add_one_var_fig(fig1, ax1, obj3.noisestr[0], obj3.avg_avgcc, yerr=obj3.std_avgcc, xscale=xscale, color="green",
-                        label_name=labels[3], legend=True, savefig=labels[0] + "_components_cc.png")
-        add_one_var_fig(fig2, ax2, obj3.noisestr[0], obj3.avg_avgre, yerr=obj3.std_avgre, xscale=xscale, color="green",
-                        label_name=labels[3], legend=True, savefig=labels[0] + "_components_re.png")
-        add_one_var_fig(fig3, ax3, obj3.noisestr[0], obj3.avg_avgdist, yerr=obj3.std_avgdist, xscale=xscale,
-                        yscale=10 ** 3,
-                        color="green", label_name=labels[3], legend=True,
-                        savefig=labels[0] + "_components_dist.png")
-        add_one_var_fig(fig4, ax4, obj3.noisestr[0], obj3.avg_snr, yerr=obj3.std_snr, xscale=xscale, color="green",
-                        label_name=labels[3], legend=True, savefig=labels[0] + "_components_snr.png")
+        ax3.hlines(obj3.avg_avgdist[res]*10**3, min(ratios), max(ratios), colors="blue", linestyles='solid',
+                   label='vertical')
+        ax3.legend()
+        # add_one_var_fig(fig1, ax1, obj3.noisestr[0], obj3.avg_avgcc, yerr=obj3.std_avgcc, xscale=xscale, color="green",
+        #                 label_name=labels[3], legend=True, savefig=labels[0] + "_components_cc.png")
+        # add_one_var_fig(fig2, ax2, obj3.noisestr[0], obj3.avg_avgre, yerr=obj3.std_avgre, xscale=xscale, color="green",
+        #                 label_name=labels[3], legend=True, savefig=labels[0] + "_components_re.png")
+        # add_one_var_fig(fig3, ax3, obj3.noisestr[0], obj3.avg_avgdist, yerr=obj3.std_avgdist, xscale=xscale,
+        #                 yscale=10 ** 3,
+        #                 color="green", label_name=labels[3], legend=True,
+        #                 savefig=labels[0] + "_components_dist.png")
+        # add_one_var_fig(fig4, ax4, obj3.noisestr[0], obj3.avg_snr, yerr=obj3.std_snr, xscale=xscale, color="green",
+        #                 label_name=labels[3], legend=True, savefig=labels[0] + "_components_snr.png")
 
+    plt.savefig(fname[:-3] + "png", dpi=300)
     plt.show()
 
     return
@@ -262,6 +233,8 @@ def simulate_rms(filename="default", system_glob="OPM", components=["rad", "tan"
     ave_std_subjects = np.std(rmss, axis=1)
     ave_std = np.std(ave_rmss)
 
+    print(ave_rmss_subjects)
+
     return 0
 
 
@@ -343,15 +316,16 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
         # noise_std_base = 75
         # for ii in np.arange(1.0, 1.5, 0.05):
         #     noise_std = noise_std_base * ii
-        for ii in range(22, 0, -3):  # CAN ALSO BE SNR
-            noise_std = float(ii)
+        # for ii in range(22, 0, -3):  # CAN ALSO BE SNR
+        #     noise_std = float(ii)
         # for ii in range(0, 200, 25):
+        for ii in range(0, 400, 25):
         # for ii in range(0, 25, 25):
-        #    noise_std = float(ii) * 1.0 * 10 ** (-15)
+            noise_std = float(ii) * 1.0 * 10 ** (-15)
             # for iii in range(0, 8, 1):
             for iii in range(0, 1, 1):
                 spont_nois_dip = float(iii) * 1.0 * 10 ** (-9)
-                print ("current: " + name + ", random noise: " + str(noise_std) + ", spon. noise: " + str(spont_nois_dip))
+                print("current: " + name + ", random noise: " + str(noise_std) + ", spon. noise: " + str(spont_nois_dip))
 
                 if continue_session:
                     if noise_std in avg_stat.noisestr[j] and spont_nois_dip in avg_stat.spontnoise[j]:
@@ -370,8 +344,8 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
                                                                      no_noises=number_of_noises,
                                                                      components=components, bem=bem, src=src)
 
-                # evoked_opm_noised, random_noises = add_noise_random(evoked_opm, noise_std)
-                evoked_opm_noised, random_noises = add_noise_random_str(evoked_opm, noise_std)
+                evoked_opm_noised, random_noises = add_noise_random(evoked_opm, noise_std)
+                # evoked_opm_noised, random_noises = add_noise_random_str(evoked_opm, noise_std)
 
                 evoked_opm_noised2, spont_noises = add_noise_spontanous(evoked_opm_noised, spont_nois_dip,
                                                                         evoked_opm.times,
@@ -383,11 +357,11 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
                 # plt.savefig("system4.png")
                 # plt.show()
 
-                fit_dip_opm, recon_field_opm = localize_dip(evoked_opm_noised2, data_path, name, bem=bem, n_jobs=n_jobs)
+                # fit_dip_opm, recon_field_opm = localize_dip(evoked_opm_noised2, data_path, name, bem=bem, n_jobs=n_jobs)
 
-                dist, avg_dist = dipole_distance(dip_sim, fit_dip_opm)
-                rel_err, corr_coeff, rel_err_avg, corr_coeff_avg = recc_two_evoked(evoked_opm_noised2, recon_field_opm)
-                SNR_db_avgs, SNR_avgs, SNR_db, SNR = estimate_snr(evoked_opm, [random_noises, spont_noises])
+                # dist, avg_dist = dipole_distance(dip_sim, fit_dip_opm)
+                # rel_err, corr_coeff, rel_err_avg, corr_coeff_avg = recc_two_evoked(evoked_opm_noised2, recon_field_opm)
+                SNR_db_avgs, SNR_avgs, rms_signal, rms_noise = estimate_snr(evoked_opm, [random_noises, spont_noises])
 
                 # avg_dist = random.random()
                 # rel_err_avg = random.random()
@@ -402,20 +376,20 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
                 # SNR_db = np.random.random_sample(number_of_noises)
 
 
-                avg_stat.add_avgdist(avg_dist, j)
-                avg_stat.add_avgre(rel_err_avg, j)
-                avg_stat.add_avgcc(corr_coeff_avg, j)
+                # avg_stat.add_avgdist(avg_dist, j)
+                # avg_stat.add_avgre(rel_err_avg, j)
+                # avg_stat.add_avgcc(corr_coeff_avg, j)
                 avg_stat.add_avgsnr(SNR_avgs, j)
                 avg_stat.add_avgsnrdb(SNR_db_avgs, j)
 
                 avg_stat.add_spontnoise(spont_nois_dip, j)
                 avg_stat.add_noisestr(noise_std, j)
 
-                avg_stat.add_dists(dist, j)
-                avg_stat.add_res(rel_err, j)
-                avg_stat.add_ccs(corr_coeff, j)
-                avg_stat.add_snrs(SNR, j)
-                avg_stat.add_snr_dbs(SNR_db, j)
+                # avg_stat.add_dists(dist, j)
+                # avg_stat.add_res(rel_err, j)
+                # avg_stat.add_ccs(corr_coeff, j)
+                avg_stat.add_rmssignal(rms_signal, j)
+                avg_stat.add_rmsnoise(rms_noise, j)
 
                 avg_stat.save_obj(filename)
 
@@ -1022,8 +996,8 @@ def estimate_snr(evoked_sig, evoked_noise, noise_times=[], signal_times=[]):
     # rms_signal_nonavg = np.sqrt(np.square(evoked1.data))
     # rms_noise_nonavg = np.sqrt(np.square(evoked2.data))
 
-    SNR_db = 20 * np.log10(np.mean(rms_signal) / np.mean(rms_noise))
-    SNR = np.mean(rms_signal) / np.mean(rms_noise)
+    SNR_db = np.mean(20 * np.log10(rms_signal / rms_noise))
+    SNR = np.mean(rms_signal / rms_noise)
 
     # SNR_db_nonavg = np.mean(20 * np.log10(rms_signal_nonavg / rms_noise_nonavg), axis=0)
     # SNR_nonavg = np.mean(rms_signal_nonavg / rms_noise_nonavg, axis=0)
@@ -1238,8 +1212,8 @@ def simulate_aef_squid_mnepython(standard_path, block_name_squid, subject_dir, p
                                                       tangential=tang, planar_gradiometer=planar, grad_plane=grad_plan,
                                                       dir_plane=dir_plan)
 
-    plot_magnetometers3(subject_dir, name, xyz1, rot_matrix, magnetometer_number=mag_num,
-                        coil_def='data/coil_def_custom.dat', filename=name_of_syst)
+    # plot_magnetometers3(subject_dir, name, xyz1, rot_matrix, magnetometer_number=mag_num,
+    #                     coil_def='data/coil_def_custom.dat', filename=name_of_syst)
 
     info = create_squids2(xyz1[:, 0:3], rot_matrix, mag_number=mag_num)
 
@@ -2354,8 +2328,8 @@ class AvgStatistics:
         self.dist = []  # Array of all distances
         self.cc = []  # Array of all ccs
         self.re = []  # Array of all res
-        self.snr = []  # Array of all snrs
-        self.snrdb = []  # Array of all snrdbs
+        self.rms_noise = []  # Array of all snrs
+        self.rms_signal = []  # Array of all snrdbs
 
         self.names = np.array(())  # Array of all names
 
@@ -2398,8 +2372,8 @@ class AvgStatistics:
         self.dist.append([])
         self.cc.append([])
         self.re.append([])
-        self.snr.append([])
-        self.snrdb.append([])
+        self.rms_signal.append([])
+        self.rms_noise.append([])
 
         self.avgdist.append([])
         self.avgcc.append([])
@@ -2429,11 +2403,11 @@ class AvgStatistics:
     def add_res(self, values_arr, subj_i):
         self.re[subj_i].append(values_arr)
 
-    def add_snrs(self, values_arr, subj_i):
-        self.snr[subj_i].append(values_arr)
+    def add_rmssignal(self, values_arr, subj_i):
+        self.rms_signal[subj_i].append(values_arr)
 
-    def add_snr_dbs(self, values_arr, subj_i):
-        self.snrdb[subj_i].append(values_arr)
+    def add_rmsnoise(self, values_arr, subj_i):
+        self.rms_noise[subj_i].append(values_arr)
 
     def add_avgdist(self, values_arr, subj_i):
         self.avgdist[subj_i].append(values_arr)
@@ -2461,8 +2435,8 @@ class AvgStatistics:
         self.avg_avgdist2 = np.average(self.dist, axis=(0, 2))
         self.avg_avgcc2 = np.average(self.cc, axis=(0, 2))
         self.avg_avgre2 = np.average(self.re, axis=(0, 2))
-        self.avg_snr2 = np.average(self.snr, axis=(0, 2))
-        self.avg_snrdb2 = np.average(self.snrdb, axis=(0, 2))
+        self.avg_rmssignal = np.average(self.rms_signal, axis=(0, 2))
+        self.avg_rmsnoise = np.average(self.rms_noise, axis=(0, 2))
 
     def calc_stds(self):
         self.std_avgdist = np.std(np.array(self.avgdist), axis=0)
@@ -2475,8 +2449,8 @@ class AvgStatistics:
         self.std_avgdist2 = np.std(self.dist, axis=(0, 2))
         self.std_avgcc2 = np.std(self.cc, axis=(0, 2))
         self.std_avgre2 = np.std(self.re, axis=(0, 2))
-        self.std_snr2 = np.std(self.snr, axis=(0, 2))
-        self.std_snrdb2 = np.std(self.snrdb, axis=(0, 2))
+        self.std_rmssignal = np.std(self.rms_signal, axis=(0, 2))
+        self.std_rmsnoise = np.std(self.rms_noise, axis=(0, 2))
 
     def save_obj(self, file_path):
         import pickle
