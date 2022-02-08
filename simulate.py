@@ -22,10 +22,14 @@ import random
 
 
 def main():
-    # simulate_rms("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], bem="sphere", rand_dir=0)
-    # simulate_rms("test.obj", system_glob="SQUID", magnetometer_type=1, bem="sphere", rand_dir=1)
+    # simulate_rms("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], rand_dir=1)
+    # simulate_rms("test.obj", system_glob="SQUID", magnetometer_type=6, rand_dir=1)
 
-    # simulate("simulate1911-radtan.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan"], bem="sphere", rand_dir=1)
+    # simulate("simulate1911-tanver.obj", system_glob="OPM", magnetometer_type=1, components=["tan", "ver"], bem="sphere",
+    #         rand_dir=1, n_jobs=1)
+    
+    # simulate("simulate0301-tan.obj", system_glob="OPM", magnetometer_type=1, components=["tan"],
+    #          rand_dir=1, n_jobs=1)
 
     # simulate("simulate2808-squid1-std.obj", system_glob="SQUID", magnetometer_type=1)
     # simulate("simulate2808-squid2-std.obj", system_glob="SQUID", magnetometer_type=2)
@@ -35,12 +39,15 @@ def main():
     # simulate("simulate2808-squid6-std.obj", system_glob="SQUID", magnetometer_type=6)
 
     # simulate("test.obj", system_glob="SQUID", magnetometer_type=6, n_jobs=1)
+    # simulate("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], rand_dir=1)
+
     # simulate("simulate2508-squid1.obj", system_glob="SQUID", magnetometer_type=1, n_jobs=1)
 
+    simulate("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], rand_dir=1, n_jobs=1)
     # simulate("simulate2708-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], n_jobs=1)
     # simulate("simulate2508-squid1.obj", system_glob="SQUID", magnetometer_type=1, n_jobs=1)
 
-    test("simulate1911-radtan.obj")
+    # test("simulate1911-radtan.obj")
 
     return
 
@@ -78,6 +85,39 @@ def leave_opm_sensors_intersect(evoked, leave_out, components):
     return evoked
 
 
+def plot_srcspace(src, subject, subjects_dir, trans):
+    lh = src[0]
+    verts = lh['rr']  # The vertices of the source space
+    tris = lh['tris']
+    dip_pos = lh['rr'][lh['vertno']]  # The position of the dipoles
+    dip_ori = lh['nn'][lh['vertno']]
+    dip_len = len(dip_pos)
+    dip_times = [0]
+    white = (1.0, 1.0, 1.0)
+    actual_amp = np.ones(dip_len)  # misc amp to create Dipole instance
+    actual_gof = np.ones(dip_len)  # misc GOF to create Dipole instance
+    dipoles = mne.Dipole(dip_times, dip_pos, actual_amp, dip_ori, actual_gof)
+    # trans = mne.read_trans(trans_fname)
+    fig = mne.viz.create_3d_figure(size=(600, 400), bgcolor=white)
+    coord_frame = 'mri'
+
+    # Plot the cortex
+    mne.viz.plot_alignment(
+        subject=subject, subjects_dir=subjects_dir, trans=trans, surfaces='white',
+        coord_frame=coord_frame, fig=fig)
+
+    # Mark the position of the dipoles with small red dots
+    mne.viz.plot_dipole_locations(
+        dipoles=dipoles, trans=trans, mode='sphere', subject=subject,
+        subjects_dir=subjects_dir, coord_frame=coord_frame, scale=7e-4, fig=fig)
+
+    mne.viz.set_3d_view(figure=fig, azimuth=0, distance=0.25)
+
+    fig.show()
+
+
+    return
+
 
 def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, position="both", gen12=1,
                                no_noises=1, components=["rad", "tan", "ver"], bem=None, src=None, rand_dir=1,
@@ -101,6 +141,8 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 
     if bem != "sphere":
         bem = standard_path + '/MNE/' + name + '-5120-5120-5120-bem-sol.fif'
+
+    plot_srcspace(src, name, standard_path + '/subjects/', None)
 
     xyz1 = import_sensor_pos_ori_all(sensorholder_path, name, subject_dir, gen12=gen12)
     xyz2 = []
@@ -346,12 +388,14 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
         #     noise_std = noise_std_base * ii
         # for ii in range(22, 0, -3):  # CAN ALSO BE SNR
         #     noise_std = float(ii)
+        for ii in range(0, 25, 25):
         # for ii in range(0, 200, 25):
         # for ii in range(0, 400, 25):
-        for ii in range(25, 50, 25):
+        # for ii in range(25, 50, 25):
+        # for ii in range(75, 100, 25): #Most used
             noise_std = float(ii) * 1.0 * 10 ** (-15)
             # for iii in range(0, 8, 1):
-            for iii in range(1, 2, 1):
+            for iii in range(3, 4, 1):
                 spont_nois_dip = float(iii) * 1.0 * 10 ** (-9)
                 print("current: " + name + ", random noise: " + str(noise_std) + ", spon. noise: " + str(spont_nois_dip))
 
@@ -380,8 +424,19 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
                 evoked_opm_noised2, spont_noises = add_noise_spontanous(evoked_opm_noised, spont_nois_dip,
                                                                         evoked_opm.times,
                                                                         data_path, name, bem=bem, src=src)
+                # import matplotlib.pyplot as plt
+                # plot_evokedobj_topo_v3(evoked_opm, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                # plt.savefig("unonoised.png")
+                #
+                # plot_evokedobj_topo_v3(random_noises, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                # plt.savefig("random_noises.png")
+                #
+                # plot_evokedobj_topo_v3(spont_noises, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                # plt.savefig("spont_noises.png")
 
-                steps = np.linspace(1, 0, 10)[1:10]
+                # plt.show()
+
+                steps = np.linspace(1, 0, 11)[1:11]
                 for step in steps:
                     no_sensors = int(step * len(evoked_opm_noised2.ch_names) / len(components))
                     evoked_opm_noised3 = leave_opm_sensors_intersect(evoked_opm_noised2.copy(),
@@ -1352,6 +1407,9 @@ def add_noise_spontanous(evoked, dip_str, times, standard_path, name, no_dip=100
     return evoked_noised, noises
 
 
+
+
+
 def generate_dip(src, times, max_dip, rand_dir=1, rand_dip=1):
     import random
 
@@ -1386,6 +1444,8 @@ def generate_dip(src, times, max_dip, rand_dir=1, rand_dip=1):
     return dip, dip_str
 
 
+
+
 def localize_dip(evoked, standard_path, name, bem=None, n_jobs=1):
     import mne
     import matplotlib.pyplot as plt
@@ -1417,7 +1477,7 @@ def localize_dip(evoked, standard_path, name, bem=None, n_jobs=1):
     reconst_field = evoked.copy()
     reconst_field.data = reconst_field.data - field_resid.data
 
-    # dip.plot_locations(trans, name, subjects_dir, mode='orthoview')
+    # dip.plot_locat    ions(trans, name, subjects_dir, mode='orthoview')
     # dip_true.plot_locations(trans, name, subjects_dir, mode='orthoview')
 
     # plt.show()
@@ -1599,7 +1659,7 @@ def plot_evokedobj_topo_v3(evoked, data_path, block_name, system, time, subject_
             clb1 = fig.colorbar(im11, shrink=0.8, extend='both', ax=ax1)
             clb1.ax.tick_params(labelsize=30)
             clb1.ax.set_title('$B [\mathrm{fT}]$', fontsize=30)
-            ax1.set_title("$\mathrm{radial}$", fontsize=30)
+            ax1.set_title("$\mathrm{OPM-NOR}$", fontsize=25)
             ax1.axis('off')
 
         if len(tan_picks) > 0:
@@ -1627,7 +1687,7 @@ def plot_evokedobj_topo_v3(evoked, data_path, block_name, system, time, subject_
             clb2 = fig.colorbar(im12, shrink=0.8, extend='both', ax=ax2)
             clb2.ax.set_title('$B [\mathrm{fT}]$', fontsize=30)
             clb2.ax.tick_params(labelsize=30)
-            ax2.set_title("$\mathrm{tangential}$", fontsize=30)
+            ax2.set_title("$\mathrm{OPM-TAN-LAT}$", fontsize=25)
             ax2.axis('off')
 
         if len(ver_picks) > 0:
@@ -1655,7 +1715,7 @@ def plot_evokedobj_topo_v3(evoked, data_path, block_name, system, time, subject_
             clb2 = fig.colorbar(im12, shrink=0.8, extend='both', ax=ax3)
             clb2.ax.set_title('$B [\mathrm{fT}]$', fontsize=30)
             clb2.ax.tick_params(labelsize=30)
-            ax3.set_title("$\mathrm{axial}$", fontsize=30)
+            ax3.set_title("$\mathrm{OPM-TAN-LON}$", fontsize=25)
             ax3.axis('off')
 
         if len(abs_picks) > 0:

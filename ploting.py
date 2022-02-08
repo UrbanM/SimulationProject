@@ -22,11 +22,12 @@ import random
 
 
 def main():
+
     # FIGURE 5
     # visualize4("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
     #            fname3="simulate3007,1908-ver.obj", labels=["all combined", "radial", "tangential (longitude)", "tangential (latitude)"])
-    visualize4_SNR("simulate2808-snr-all.obj", fname1="simulate2808-snr-rad.obj", fname2="simulate2808-snr-tan.obj",
-               fname3="simulate2808-snr-ver.obj", labels=["all combined", "radial", "tangential (longitude)", "tangential (latitude)"])
+    # visualize4_SNR("simulate2808-snr-all.obj", fname1="simulate2808-snr-rad.obj", fname2="simulate2808-snr-tan.obj",
+    #            fname3="simulate2808-snr-ver.obj", labels=["all combined", "radial", "tangential (longitude)", "tangential (latitude)"])
 
     # FIGURE 6
     # visualize5("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
@@ -36,8 +37,8 @@ def main():
 
 
     # FIGURE 7, 8, 9, 10
-    # plot_contour("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
-    #             fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"], parameter="dist")
+    # plot_contour("Archive/simulate3007,1908-all.obj", fname1="Archive/simulate3007,1908-rad.obj", fname2="Archive/simulate3007,1908-tan.obj",
+    #             fname3="Archive/simulate3007,1908-ver.obj", labels=["OPM-ALL", "OPM-NOR", "OPM-TAN-LAT", "OPM-TAN-LON"], parameter="dist")
     # plot_contour("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
     #             fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"], parameter="re")
     # plot_contour("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
@@ -45,7 +46,7 @@ def main():
     # plot_contour("simulate3007,1908-all.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
     #             fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"], parameter="snr")
     # plot_contour_SNR("simulate2808-snr-all.obj", fname1="simulate2808-snr-rad.obj", fname2="simulate2808-snr-tan.obj",
-    #             fname3="simulate2808-snr-ver.obj", labels=["all", "rad", "tan", "ver"], parameter="snr")
+    #             fname3="simulate2808-snr-ver.obj", labels=["OPM-ALL", "OPM-NOR", "OPM-TAN-LAT", "OPM-TAN-LON"], parameter="snr")
 
     # FIGURE 11
     # visualize("simulate1608,1908-squid1.obj", fname1="simulate1608,1908-squid2.obj", fname2="simulate1608,1908-squid3.obj",
@@ -85,12 +86,12 @@ def main():
     # FIGURE 15!!!!!!!
     # visualize_relative("simulate2608-all-relative.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
     #           fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"])
-    # visualize_relative("simulate3008-all-relative.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
-    #           fname3="simulate3007,1908-ver.obj", labels=["all combined", "radial", "tangential (longitude)", "tangential (latitude)"])
+    # visualize_relative("Archive/simulate3008-all-relative.obj", fname1="Archive/simulate3007,1908-rad.obj", fname2="Archive/simulate3007,1908-tan.obj",
+    #           fname3="Archive/simulate3007,1908-ver.obj", labels=["OPM-ALL", "OPM-NOR", "OPM-TAN-LAT", "OPM-TAN-LON"])
     # visualize_relative("simulate2808-all-relative.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
     #           fname3="simulate3007,1908-ver.obj", labels=["all", "rad", "tan", "ver"])
-    # visualize_relative("simulate2908-all-relative.obj", fname1="simulate3007,1908-rad.obj", fname2="simulate3007,1908-tan.obj",
-    #           fname3="simulate3007,1908-ver.obj", labels=["all combined", "radial", "tangential (longitude)", "tangential (latitude)"])
+    # visualize_relative("Archive/simulate2908-all-relative.obj", fname1="Archive/simulate3007,1908-rad.obj", fname2="Archive/simulate3007,1908-tan.obj",
+    #           fname3="Archive/simulate3007,1908-ver.obj", labels=["all combined", "radial", "tangential (longitude)", "tangential (latitude)"])
 
     # FIGURE 16
     # visualize3("simulate2708-squid2.obj", fname1="simulate2708-squid5.obj", fname2="simulate2708-squid6.obj",
@@ -98,11 +99,63 @@ def main():
     #           labels=["SQUID magnetometer (rad.)", "SQUID magnetometer (tan. lat.)", "SQUID magnetometer (tan. long.)",
     #           "OPM radial", "OPM tangential (latitude)", "OPM tangential (longitude)"], addtoname="-combined")
 
-    # FIGURE 17
-    # visualize4("simulate1608,1908-squid2.obj", fname1="simulate1608,1908-squid5.obj", fname2="simulate1608,1908-squid6.obj",
-    #           fname3="simulate3007,1908-rad.obj", fname4="simulate3007,1908-tan.obj", fname5="simulate3007,1908-ver.obj",
-    #           labels=["SQUID magnetometer (rad.)", "SQUID magnetometer (tan. lat.)", "SQUID magnetometer (tan. long.)",
-    #           "OPM radial", "OPM tangential (latitude)", "OPM tangential (longitude)"], addtoname="-combined")
+    # FIGURE 17 (NEW FIG6)
+    # visualize4("Archive/simulate1608,1908-squid2.obj", fname1="Archive/simulate1608,1908-squid5.obj", fname2="Archive/simulate1608,1908-squid6.obj",
+    #           fname3="Archive/simulate3007,1908-rad.obj", fname4="Archive/simulate3007,1908-tan.obj", fname5="Archive/simulate3007,1908-ver.obj",
+    #           fname6="Archive/simulate3007,1908-all.obj",
+    #           labels=["SQUID-NOR", "SQUID-TAN-LAT", "SQUID-TAN-LON",
+    #           "OPM-NOR", "OPM-TAN-LAT", "OPM-TAN-LON", "OPM-ALL"], addtoname="-combined-new")
+
+    #FIGURE 18 (NEW FIG5)
+    # visualize5("simulate1708-squid2.obj", fname1="simulate1708-squid5.obj", fname2="simulate1708-squid6.obj",
+    #           fname3="Archive/simulate3007,1908-rad.obj", fname4="Archive/simulate3007,1908-tan.obj",
+    #           fname5="Archive/simulate3007,1908-ver.obj", fname6="Archive/simulate3007,1908-all.obj",
+    #           labels=["SQUID-NOR", "SQUID-TAN-LAT", "SQUID-TAN-LON",
+    #           "OPM-NOR", "OPM-TAN-LAT", "OPM-TAN-LON", "OPM-ALL"])
+
+    # FIGURE reduced sensor count (NEW FIG9)
+    # figure_reduced_sens(name="simulate0301")
+
+    # FIGURE reduced sensor count (NEW FIG9B)
+    figure_reduced_sens(name="simulate2601")
+
+    return
+
+def figure_reduced_sens(name):
+    import matplotlib.pyplot as plt
+    yattr = "avg_avgdist"
+    xattr = "sensno"
+    yerrattr = "std_avgdist"
+    xscale = 10.0**2
+    yscale = 10.0 ** 3
+    yname = "$d_{\mathrm{s,f}} \mathrm{[mm]}$"
+
+    # yattr = "avg_avgcc"
+    # xattr = "sensno"
+    # yerrattr = "std_avgcc"
+    # xscale = 10.0**2
+    # yscale = 1
+    # yname = "CC"
+
+    fig, ax = visualize_uniform(name + "-rad.obj", yattr, xattr, yerr_attr=yerrattr, label="OPM-NOR",
+                                yname=yname, yscale=yscale, xscale=xscale,
+                                xname="\% of sensors removed", marker="X")
+    visualize_uniform(name + "-tan.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="r", label="OPM-TAN-LAT", yscale=yscale, xscale=xscale, marker="s")
+    visualize_uniform(name + "-ver.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="g", label="OPM-TAN-LON", yscale=yscale, xscale=xscale, marker="o")
+    visualize_uniform(name + "-radtanver.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="b", label="OPM-ALL", yscale=yscale, xscale=xscale, marker="^")
+
+    visualize_uniform(name + "-radtan.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="orange", label="OPM-NOR,TAN-LAT", yscale=yscale, xscale=xscale, marker="P")
+    visualize_uniform(name + "-radver.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="purple", label="OPM-NOR,TAN-LON", yscale=yscale, xscale=xscale, marker="D")
+    visualize_uniform(name + "-tanver.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="brown", label="OPM-TAN-LAT,LON", yscale=yscale, xscale=xscale, marker="*")
+    plt.savefig(name+"-reducedsens.png", dpi=300)
+    plt.show()
+
 
     return
 
@@ -141,7 +194,7 @@ def visualize_relative(fname, fname1=None, fname2=None, fname3=None, labels=["em
     # fig2, ax2 = plot_one_var(obj.noisestr[0], obj.avg_avgre, yerr=obj.std_avgre, xname=xname, yname="$\mathrm{RE}$",
     #                          xscale=xscale, label_name=labels[0], legend=True)
     fig3, ax3 = plot_one_var(ratios, obj.avg_avgdist, yerr=obj.std_avgdist, xname=xname,
-                             yname="$d(p1, p2) \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
+                             yname="$d_{\mathrm{s,f}} \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
                              label_name=labels[0], legend=True)
     # fig4, ax4 = plot_one_var(obj.noisestr[0], obj.avg_snr, yerr=obj.std_snr, xname=xname, yname="$\mathrm{SNR}$",
     #                          xscale=xscale, label_name=labels[0], legend=True)
@@ -401,7 +454,7 @@ def plot_contour(fname, fname1=None, fname2=None, fname3=None, labels=["empty", 
 
     inf_zero=0
     if parameter=="dist":
-        zlabel = "$d(p1, p2) \mathrm{[mm]}$"
+        zlabel = "$d_{\mathrm{s,f}} \mathrm{[mm]}$"
         z = obj.avg_avgdist*10**3
         z1 = obj1.avg_avgdist*10**3
         z2 = obj2.avg_avgdist*10**3
@@ -482,9 +535,9 @@ def plot_contour(fname, fname1=None, fname2=None, fname3=None, labels=["empty", 
         plt.xlim(xmin, xmax)
         plt.ylim(ymin, ymax)
         plt.xlabel("$\sigma \mathrm{[fT]}$")
-        plt.ylabel("$ || q_{\mathrm{spont}} ||  \mathrm{[nAm]}$")
+        plt.ylabel("$q_{\mathrm{spont}} \mathrm{[nAm]}$")
         clb.ax.set_title(zlabel)
-        plt.savefig(fname[:-3]+"-"+labels[i_inst]+"-"+parameter+".png")
+        plt.savefig(fname[:-3]+"-"+labels[i_inst]+"-"+parameter+".png", dpi=300)
         plt.show()
 
     return
@@ -603,7 +656,7 @@ def visualize(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5=
     fig2, ax2 = plot_one_var(obj.noisestr[0], obj.avg_avgre, yerr=obj.std_avgre, xname="$\sigma \mathrm{[fT]}$",
                              yname="$\mathrm{RE}$", xscale=10 ** 15, label_name=labels[0] , legend=True)
     fig3, ax3 = plot_one_var(obj.noisestr[0], obj.avg_avgdist, yerr=obj.std_avgdist, xname="$\sigma \mathrm{[fT]}$",
-                             yname="$d(p1, p2) \mathrm{[mm]}$", xscale=10 ** 15, yscale=10 ** 3,
+                             yname="$d{\mathrm{s,f}} \mathrm{[mm]}$", xscale=10 ** 15, yscale=10 ** 3,
                              label_name=labels[0], legend=True)
     fig4, ax4 = plot_one_var(obj.noisestr[0], obj.avg_snr, yerr=obj.std_snr, xname="$\sigma \mathrm{[fT]}$",
                              yname="$\mathrm{SNR}$", xscale=10 ** 15, label_name=labels[0] , legend=True)
@@ -965,8 +1018,8 @@ def visualize3(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5
     return
 
 
-def visualize4(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5=None,
-              labels=["empty", "empty", "empty", "empty", "empty", "empty"], addtoname=""):
+def visualize4(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5=None, fname6=None,
+              labels=["empty", "empty", "empty", "empty", "empty", "empty", "empty"], addtoname=""):
     import matplotlib.pyplot as plt
     obj = read_obj(fname)
     obj.calc_avgs()
@@ -997,84 +1050,123 @@ def visualize4(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5
         obj5.calc_avgs()
         obj5.calc_stds()
 
+    if isinstance(fname6, str):
+        obj6 = read_obj(fname6)
+        obj6.calc_avgs()
+        obj6.calc_stds()
+
     xscale = 10 ** 15
     # xscale = 1
+
     xname = "$\sigma \mathrm{[fT]}$"
-    # xname = "$\| SNR \|  \mathrm{[dB]}$"
 
     # np.argwhere(np.array(obj.spontnoise[0]) == 0.0).tolist()
     res = [idx for idx, val in enumerate(obj.spontnoise[0]) if val == 0.0]
 
     fig1, ax1 = plot_one_var(np.array(obj.noisestr[0])[res], np.array(obj.avg_avgcc)[res], yerr=np.array(obj.std_avgcc)[res], xname=xname, yname="$\mathrm{CC}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+                             xscale=xscale, label_name=labels[0], legend=False, marker="X")
     fig2, ax2 = plot_one_var(np.array(obj.noisestr[0])[res], np.array(obj.avg_avgre)[res], yerr=np.array(obj.std_avgre)[res], xname=xname, yname="$\mathrm{RE}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+                             xscale=xscale, label_name=labels[0], legend=False, marker="X")
     fig3, ax3 = plot_one_var(np.array(obj.noisestr[0])[res], np.array(obj.avg_avgdist)[res], yerr=np.array(obj.std_avgdist)[res], xname=xname,
-                             yname="$d(p1, p2) \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
-                             label_name=labels[0], legend=True)
+                             yname="$d_{\mathrm{s,f}} \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
+                             label_name=labels[0], legend=False, marker="X")
     fig4, ax4 = plot_one_var(np.array(obj.noisestr[0])[res], np.array(obj.avg_snrdb)[res], yerr=np.array(obj.std_snrdb)[res], xname=xname, yname="$\mathrm{SNR [dB]}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+                             xscale=xscale, label_name=labels[0], legend=False, marker="X")
 
     if isinstance(fname1, str):
+        ccolor = "red"
+        cmarker = "s"
+
         res = [idx for idx, val in enumerate(obj1.spontnoise[0]) if val == 0.0]
-        add_one_var_fig(fig1, ax1, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_avgcc)[res], yerr=np.array(obj1.std_avgcc)[res], xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_avgre)[res], yerr=np.array(obj1.std_avgre)[res], xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
+        add_one_var_fig(fig1, ax1, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_avgcc)[res], yerr=np.array(obj1.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[1], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_avgre)[res], yerr=np.array(obj1.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[1], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_avgdist)[res], yerr=np.array(obj1.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="red", label_name=labels[1], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_snrdb)[res], yerr=np.array(obj1.std_snrdb)[res], xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[1], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj1.noisestr[0])[res], np.array(obj1.avg_snrdb)[res], yerr=np.array(obj1.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[1], legend=False, marker=cmarker)
 
     if isinstance(fname2, str):
+        ccolor = "green"
+        cmarker = "o"
+
         res = [idx for idx, val in enumerate(obj2.spontnoise[0]) if val == 0.0]
-        add_one_var_fig(fig1, ax1, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_avgcc)[res], yerr=np.array(obj2.std_avgcc)[res], xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_avgre)[res], yerr=np.array(obj2.std_avgre)[res], xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
+        add_one_var_fig(fig1, ax1, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_avgcc)[res], yerr=np.array(obj2.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[2], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_avgre)[res], yerr=np.array(obj2.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[2], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_avgdist)[res], yerr=np.array(obj2.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="blue", label_name=labels[2], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_snrdb)[res], yerr=np.array(obj2.std_snrdb)[res], xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[2], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj2.noisestr[0])[res], np.array(obj2.avg_snrdb)[res], yerr=np.array(obj2.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[2], legend=False, marker=cmarker)
 
     if isinstance(fname3, str):
+        ccolor = "blue"
+        cmarker = "^"
+
         res = [idx for idx, val in enumerate(obj3.spontnoise[0]) if val == 0.0]
-        add_one_var_fig(fig1, ax1, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_avgcc)[res], yerr=np.array(obj3.std_avgcc)[res], xscale=xscale, color="green",
-                        label_name=labels[3], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_avgre)[res], yerr=np.array(obj3.std_avgre)[res], xscale=xscale, color="green",
-                        label_name=labels[3], legend=True)
+        add_one_var_fig(fig1, ax1, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_avgcc)[res], yerr=np.array(obj3.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_avgre)[res], yerr=np.array(obj3.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_avgdist)[res], yerr=np.array(obj3.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="green", label_name=labels[3], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_snrdb)[res], yerr=np.array(obj3.std_snrdb)[res], xscale=xscale, color="green",
-                        label_name=labels[3], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[3], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj3.noisestr[0])[res], np.array(obj3.avg_snrdb)[res], yerr=np.array(obj3.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
 
     if isinstance(fname4, str):
+        ccolor = "orange"
+        cmarker = "P"
+
         res = [idx for idx, val in enumerate(obj4.spontnoise[0]) if val == 0.0]
-        add_one_var_fig(fig1, ax1, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_avgcc)[res], yerr=np.array(obj4.std_avgcc)[res], xscale=xscale, color="cyan",
-                        label_name=labels[4], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_avgre)[res], yerr=np.array(obj4.std_avgre)[res], xscale=xscale, color="cyan",
-                        label_name=labels[4], legend=True)
+        add_one_var_fig(fig1, ax1, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_avgcc)[res], yerr=np.array(obj4.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[4], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_avgre)[res], yerr=np.array(obj4.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[4], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_avgdist)[res], yerr=np.array(obj4.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="cyan", label_name=labels[4], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_snrdb)[res], yerr=np.array(obj4.std_snrdb)[res], xscale=xscale, color="cyan",
-                        label_name=labels[4], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[4], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj4.noisestr[0])[res], np.array(obj4.avg_snrdb)[res], yerr=np.array(obj4.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[4], legend=False, marker=cmarker)
 
     if isinstance(fname5, str):
+        ccolor = "purple"
+        cmarker = "D"
+
         res = [idx for idx, val in enumerate(obj5.spontnoise[0]) if val == 0.0]
-        add_one_var_fig(fig1, ax1, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_avgcc)[res], yerr=np.array(obj5.std_avgcc)[res], xscale=xscale, color="pink",
-                        label_name=labels[5], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_avgre)[res], yerr=np.array(obj5.std_avgre)[res], xscale=xscale, color="pink",
-                        label_name=labels[5], legend=True)
+        add_one_var_fig(fig1, ax1, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_avgcc)[res], yerr=np.array(obj5.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[5], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_avgre)[res], yerr=np.array(obj5.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_avgdist)[res], yerr=np.array(obj5.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="pink", label_name=labels[5], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_snrdb)[res], yerr=np.array(obj5.std_snrdb)[res], xscale=xscale, color="pink",
-                        label_name=labels[5], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[5], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj5.noisestr[0])[res], np.array(obj5.avg_snrdb)[res], yerr=np.array(obj5.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[5], legend=False, marker=cmarker)
 
-    fig1.savefig(fname[:-4] + "-sigma-cc"+ addtoname +".png", dpi=300)
-    fig2.savefig(fname[:-4] + "-sigma-re"+ addtoname +".png", dpi=300)
-    fig3.savefig(fname[:-4] + "-sigma-dist"+ addtoname +".png", dpi=300)
-    fig4.savefig(fname[:-4] + "-sigma-snrdb"+ addtoname +".png", dpi=300)
+    if isinstance(fname6, str):
+        ccolor = "brown"
+        cmarker = "*"
 
+        res = [idx for idx, val in enumerate(obj6.spontnoise[0]) if val == 0.0]
+        add_one_var_fig(fig1, ax1, np.array(obj6.noisestr[0])[res], np.array(obj6.avg_avgcc)[res], yerr=np.array(obj6.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj6.noisestr[0])[res], np.array(obj6.avg_avgre)[res], yerr=np.array(obj6.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig3, ax3, np.array(obj6.noisestr[0])[res], np.array(obj6.avg_avgdist)[res], yerr=np.array(obj6.std_avgdist)[res], xscale=xscale,
+                        yscale=10 ** 3, color=ccolor, label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj6.noisestr[0])[res], np.array(obj6.avg_snrdb)[res], yerr=np.array(obj6.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
+
+    fig1.savefig(fname[:-4] + "-sigma-cc" + addtoname +".png", dpi=300)
+    fig2.savefig(fname[:-4] + "-sigma-re" + addtoname +".png", dpi=300)
+    fig3.savefig(fname[:-4] + "-sigma-dist" + addtoname +".png", dpi=300)
+    fig4.savefig(fname[:-4] + "-sigma-snrdb" + addtoname +".png", dpi=300)
+
+    figlegend = plt.figure(figsize=(12, 1))
+    axl = figlegend.add_subplot(111)
+    plt.figlegend(*ax1.get_legend_handles_labels(), loc='center', ncol=3, prop={'size': 15})
+    axl.set_axis_off()
+    figlegend.savefig(fname[:-4] + "simulation_legend.png", dpi=300)
     plt.show()
 
     return
@@ -1162,7 +1254,7 @@ def visualize4_SNR(fname, fname1=None, fname2=None, fname3=None, fname4=None, fn
     return
 
 
-def visualize5(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5=None,
+def visualize5(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5=None, fname6=None, fname7=None,
               labels=["empty", "empty", "empty", "empty", "empty", "empty"]):
     import matplotlib.pyplot as plt
     obj = read_obj(fname)
@@ -1194,79 +1286,150 @@ def visualize5(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5
         obj5.calc_avgs()
         obj5.calc_stds()
 
+    if isinstance(fname6, str):
+        obj6 = read_obj(fname6)
+        obj6.calc_avgs()
+        obj6.calc_stds()
+
+    if isinstance(fname7, str):
+        obj7 = read_obj(fname7)
+        obj7.calc_avgs()
+        obj7.calc_stds()
+
     xscale = 10 ** 9
     # xscale = 1
     # xname = "$\sigma \mathrm{[fT]}$"
     # xname = "$\| SNR \|  \mathrm{[dB]}$"
-    xname = "$ \| q_{\mathrm{spont}} \|   \mathrm{[nAm]}$"
+    xname = "$q_{\mathrm{spont}}  \mathrm{[nAm]}$"
 
     # np.argwhere(np.array(obj.spontnoise[0]) == 0.0).tolist()
     res = [idx for idx, val in enumerate(obj.noisestr[0]) if val == 0.0]
 
     fig1, ax1 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_avgcc)[res], yerr=np.array(obj.std_avgcc)[res], xname=xname, yname="$\mathrm{CC}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+                             xscale=xscale, label_name=labels[0], legend=False, marker="X")
     fig2, ax2 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_avgre)[res], yerr=np.array(obj.std_avgre)[res], xname=xname, yname="$\mathrm{RE}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+                             xscale=xscale, label_name=labels[0], legend=False, marker="X")
     fig3, ax3 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_avgdist)[res], yerr=np.array(obj.std_avgdist)[res], xname=xname,
-                             yname="$d(p1, p2) \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
-                             label_name=labels[0], legend=True)
+                             yname="$d_{\mathrm{s,f}} \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
+                             label_name=labels[0], legend=False, marker="X")
     fig4, ax4 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_snrdb)[res], yerr=np.array(obj.std_snrdb)[res], xname=xname, yname="$\mathrm{SNR [dB]}$",
-                             xscale=xscale, label_name=labels[0], legend=True)
+                             xscale=xscale, label_name=labels[0], legend=False, marker="X")
 
     if isinstance(fname1, str):
-        add_one_var_fig(fig1, ax1, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgcc)[res], yerr=np.array(obj1.std_avgcc)[res], xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgre)[res], yerr=np.array(obj1.std_avgre)[res], xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
+        res = [idx for idx, val in enumerate(obj1.noisestr[0]) if val == 0.0]
+
+        ccolor = "red"
+        cmarker = "s"
+
+        add_one_var_fig(fig1, ax1, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgcc)[res], yerr=np.array(obj1.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[1], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgre)[res], yerr=np.array(obj1.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[1], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgdist)[res], yerr=np.array(obj1.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="red", label_name=labels[1], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_snrdb)[res], yerr=np.array(obj1.std_snrdb)[res], xscale=xscale, color="red",
-                        label_name=labels[1], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[1], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_snrdb)[res], yerr=np.array(obj1.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[1], legend=False, marker=cmarker)
 
     if isinstance(fname2, str):
-        add_one_var_fig(fig1, ax1, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgcc)[res], yerr=np.array(obj2.std_avgcc)[res], xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgre)[res], yerr=np.array(obj2.std_avgre)[res], xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
+        res = [idx for idx, val in enumerate(obj2.noisestr[0]) if val == 0.0]
+
+        ccolor = "green"
+        cmarker = "o"
+
+        add_one_var_fig(fig1, ax1, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgcc)[res], yerr=np.array(obj2.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[2], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgre)[res], yerr=np.array(obj2.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[2], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgdist)[res], yerr=np.array(obj2.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="blue", label_name=labels[2], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_snrdb)[res], yerr=np.array(obj2.std_snrdb)[res], xscale=xscale, color="blue",
-                        label_name=labels[2], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[2], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_snrdb)[res], yerr=np.array(obj2.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[2], legend=False, marker=cmarker)
 
     if isinstance(fname3, str):
-        add_one_var_fig(fig1, ax1, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgcc)[res], yerr=np.array(obj3.std_avgcc)[res], xscale=xscale, color="green",
-                        label_name=labels[3], legend=True)
-        add_one_var_fig(fig2, ax2, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgre)[res], yerr=np.array(obj3.std_avgre)[res], xscale=xscale, color="green",
-                        label_name=labels[3], legend=True)
+        res = [idx for idx, val in enumerate(obj3.noisestr[0]) if val == 0.0]
+
+        ccolor = "blue"
+        cmarker = "^"
+
+        add_one_var_fig(fig1, ax1, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgcc)[res], yerr=np.array(obj3.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgre)[res], yerr=np.array(obj3.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
         add_one_var_fig(fig3, ax3, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgdist)[res], yerr=np.array(obj3.std_avgdist)[res], xscale=xscale,
-                        yscale=10 ** 3, color="green", label_name=labels[3], legend=True)
-        add_one_var_fig(fig4, ax4, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_snrdb)[res], yerr=np.array(obj3.std_snrdb)[res], xscale=xscale, color="green",
-                        label_name=labels[3], legend=True)
+                        yscale=10 ** 3, color=ccolor, label_name=labels[3], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_snrdb)[res], yerr=np.array(obj3.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
 
     if isinstance(fname4, str):
-        add_one_var_fig(fig1, ax1, obj4.spontnoise[0], obj4.avg_avgcc, yerr=obj4.std_avgcc, xscale=xscale, color="cyan",
-                        label_name=labels[4], legend=True)
-        add_one_var_fig(fig2, ax2, obj4.spontnoise[0], obj4.avg_avgre, yerr=obj4.std_avgre, xscale=xscale, color="cyan",
-                        label_name=labels[4], legend=True)
-        add_one_var_fig(fig3, ax3, obj4.spontnoise[0], obj4.avg_avgdist, yerr=obj4.std_avgdist, xscale=xscale,
-                        yscale=10 ** 3, color="cyan", label_name=labels[4], legend=True)
-        add_one_var_fig(fig4, ax4, obj4.spontnoise[0], obj4.avg_snrdb, yerr=obj4.std_snrdb, xscale=xscale, color="cyan",
-                        label_name=labels[4], legend=True)
+        res = [idx for idx, val in enumerate(obj4.noisestr[0]) if val == 0.0]
+
+        ccolor = "orange"
+        cmarker = "P"
+
+        add_one_var_fig(fig1, ax1, np.array(obj4.spontnoise[0])[res], np.array(obj4.avg_avgcc)[res], yerr=np.array(obj4.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[4], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj4.spontnoise[0])[res], np.array(obj4.avg_avgre)[res], yerr=np.array(obj4.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[4], legend=False, marker=cmarker)
+        add_one_var_fig(fig3, ax3, np.array(obj4.spontnoise[0])[res], np.array(obj4.avg_avgdist)[res], yerr=np.array(obj4.std_avgdist)[res], xscale=xscale,
+                        yscale=10 ** 3, color=ccolor, label_name=labels[4], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj4.spontnoise[0])[res], np.array(obj4.avg_snrdb)[res], yerr=np.array(obj4.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[4], legend=False, marker=cmarker)
 
     if isinstance(fname5, str):
-        add_one_var_fig(fig1, ax1, obj5.spontnoise[0], obj5.avg_avgcc, yerr=obj5.std_avgcc, xscale=xscale, color="pink",
-                        label_name=labels[5], legend=True)
-        add_one_var_fig(fig2, ax2, obj5.spontnoise[0], obj5.avg_avgre, yerr=obj5.std_avgre, xscale=xscale, color="pink",
-                        label_name=labels[5], legend=True)
-        add_one_var_fig(fig3, ax3, obj5.spontnoise[0], obj5.avg_avgdist, yerr=obj5.std_avgdist, xscale=xscale,
-                        yscale=10 ** 3, color="pink", label_name=labels[5], legend=True)
-        add_one_var_fig(fig4, ax4, obj5.spontnoise[0], obj5.avg_snrdb, yerr=obj5.std_snrdb, xscale=xscale, color="pink",
-                        label_name=labels[5], legend=True)
+        res = [idx for idx, val in enumerate(obj5.noisestr[0]) if val == 0.0]
 
-    fig1.savefig(fname[:-4] + "-noisestr-cc.png", dpi=300)
-    fig2.savefig(fname[:-4] + "-noisestr-re.png", dpi=300)
-    fig3.savefig(fname[:-4] + "-noisestr-dist.png", dpi=300)
-    fig4.savefig(fname[:-4] + "-noisestr-snrdb.png", dpi=300)
+        ccolor = "purple"
+        cmarker = "D"
+
+        add_one_var_fig(fig1, ax1, np.array(obj5.spontnoise[0])[res], np.array(obj5.avg_avgcc)[res], yerr=np.array(obj5.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[5], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj5.spontnoise[0])[res], np.array(obj5.avg_avgre)[res], yerr=np.array(obj5.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[5], legend=False, marker=cmarker)
+        add_one_var_fig(fig3, ax3, np.array(obj5.spontnoise[0])[res], np.array(obj5.avg_avgdist)[res], yerr=np.array(obj5.std_avgdist)[res], xscale=xscale,
+                        yscale=10 ** 3, color=ccolor, label_name=labels[5], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj5.spontnoise[0])[res], np.array(obj5.avg_snrdb)[res], yerr=np.array(obj5.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[5], legend=False, marker=cmarker)
+
+    if isinstance(fname6, str):
+        res = [idx for idx, val in enumerate(obj6.noisestr[0]) if val == 0.0]
+
+        ccolor = "brown"
+        cmarker = "*"
+
+        add_one_var_fig(fig1, ax1, np.array(obj6.spontnoise[0])[res], np.array(obj6.avg_avgcc)[res], yerr=np.array(obj6.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj6.spontnoise[0])[res], np.array(obj6.avg_avgre)[res], yerr=np.array(obj6.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig3, ax3, np.array(obj6.spontnoise[0])[res], np.array(obj6.avg_avgdist)[res], yerr=np.array(obj6.std_avgdist)[res], xscale=xscale,
+                        yscale=10 ** 3, color=ccolor, label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj6.spontnoise[0])[res], np.array(obj6.avg_snrdb)[res], yerr=np.array(obj6.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[6], legend=False, marker=cmarker)
+
+    if isinstance(fname7, str):
+        res = [idx for idx, val in enumerate(obj7.noisestr[0]) if val == 0.0]
+        ccolor = "gray"
+        cmarker = "H"
+
+        add_one_var_fig(fig1, ax1, np.array(obj7.spontnoise[0])[res], np.array(obj7.avg_avgcc)[res], yerr=np.array(obj7.std_avgcc)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
+        add_one_var_fig(fig2, ax2, np.array(obj7.spontnoise[0])[res], np.array(obj7.avg_avgre)[res], yerr=np.array(obj7.std_avgre)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
+        add_one_var_fig(fig3, ax3, np.array(obj7.spontnoise[0])[res], np.array(obj7.avg_avgdist)[res], yerr=np.array(obj7.std_avgdist)[res], xscale=xscale,
+                        yscale=10 ** 3, color=ccolor, label_name=labels[6], legend=False, marker=cmarker)
+        add_one_var_fig(fig4, ax4, np.array(obj7.spontnoise[0])[res], np.array(obj7.avg_snrdb)[res], yerr=np.array(obj7.std_snrdb)[res], xscale=xscale, color=ccolor,
+                        label_name=labels[3], legend=False, marker=cmarker)
+
+    figlegend = plt.figure(figsize=(12, 1))
+    axl = figlegend.add_subplot(111)
+    plt.figlegend(*ax1.get_legend_handles_labels(), loc='center', ncol=3, prop={'size': 15})
+    axl.set_axis_off()
+
+    fig1.savefig(fname[:-4] + "-noisestr-cc-combined.png", dpi=300)
+    fig2.savefig(fname[:-4] + "-noisestr-re-combined.png", dpi=300)
+    fig3.savefig(fname[:-4] + "-noisestr-dist-combined.png", dpi=300)
+    fig4.savefig(fname[:-4] + "-noisestr-snrdb-combined.png", dpi=300)
+
+    figlegend.savefig(fname[:-4] + "simulation_legend_noisestr.png", dpi=300)
 
     plt.show()
 
@@ -1354,6 +1517,134 @@ def visualize5_SNR(fname, fname1=None, fname2=None, fname3=None, fname4=None, fn
     plt.show()
 
     return
+
+
+def visualize_uniform(fname, y_attr, x_attr, yerr_attr=None, fig=None, ax=None, xname="", yname="", xscale=1.0,
+                      yscale=1.0, label="", color="black", marker="o"):
+    import matplotlib.pyplot as plt
+    obj = read_obj(fname)
+    obj.calc_avgs()
+    obj.calc_stds()
+
+    yval = getattr(obj, y_attr)
+    xval = getattr(obj, x_attr)[0]
+
+    if yerr_attr is not None:
+        yerrval = getattr(obj, yerr_attr)
+    else:
+        yerrval = []
+
+    if fig is None and ax is None:
+        fig, ax = plot_one_var(xval, yval, yerr=yerrval, xname=xname, yname=yname, xscale=xscale, yscale=yscale,
+                               label_name=label, legend=True,marker=marker)
+    else:
+        fig, ax = add_one_var_fig(fig, ax, xval, yval, yerr=yerrval, xscale=xscale, yscale=yscale,
+                                  color=color, label_name=label, legend=True,marker=marker)
+
+
+
+    # if isinstance(fname1, str):
+    #     obj1 = read_obj(fname1)
+    #     obj1.calc_avgs()
+    #     obj1.calc_stds()
+    #
+    # if isinstance(fname2, str):
+    #     obj2 = read_obj(fname2)
+    #     obj2.calc_avgs()
+    #     obj2.calc_stds()
+    #
+    # if isinstance(fname3, str):
+    #     obj3 = read_obj(fname3)
+    #     obj3.calc_avgs()
+    #     obj3.calc_stds()
+    #
+    # if isinstance(fname4, str):
+    #     obj4 = read_obj(fname4)
+    #     obj4.calc_avgs()
+    #     obj4.calc_stds()
+    #
+    # if isinstance(fname5, str):
+    #     obj5 = read_obj(fname5)
+    #     obj5.calc_avgs()
+    #     obj5.calc_stds()
+    #
+    # xscale = 10 ** 9
+    # # xscale = 1
+    # # xname = "$\sigma \mathrm{[fT]}$"
+    # # xname = "$\| SNR \|  \mathrm{[dB]}$"
+    # xname = "$ \| q_{\mathrm{spont}} \|   \mathrm{[nAm]}$"
+    #
+    # # np.argwhere(np.array(obj.spontnoise[0]) == 0.0).tolist()
+    # res = [idx for idx, val in enumerate(obj.noisestr[0]) if val == 0.0]
+    #
+    # fig1, ax1 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_avgcc)[res], yerr=np.array(obj.std_avgcc)[res], xname=xname, yname="$\mathrm{CC}$",
+    #                          xscale=xscale, label_name=labels[0], legend=True)
+    # fig2, ax2 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_avgre)[res], yerr=np.array(obj.std_avgre)[res], xname=xname, yname="$\mathrm{RE}$",
+    #                          xscale=xscale, label_name=labels[0], legend=True)
+    # fig3, ax3 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_avgdist)[res], yerr=np.array(obj.std_avgdist)[res], xname=xname,
+    #                          yname="$d(p1, p2) \mathrm{[mm]}$", xscale=xscale, yscale=10 ** 3,
+    #                          label_name=labels[0], legend=True)
+    # fig4, ax4 = plot_one_var(np.array(obj.spontnoise[0])[res], np.array(obj.avg_snrdb)[res], yerr=np.array(obj.std_snrdb)[res], xname=xname, yname="$\mathrm{SNR [dB]}$",
+    #                          xscale=xscale, label_name=labels[0], legend=True)
+    #
+    # if isinstance(fname1, str):
+    #     add_one_var_fig(fig1, ax1, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgcc)[res], yerr=np.array(obj1.std_avgcc)[res], xscale=xscale, color="red",
+    #                     label_name=labels[1], legend=True)
+    #     add_one_var_fig(fig2, ax2, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgre)[res], yerr=np.array(obj1.std_avgre)[res], xscale=xscale, color="red",
+    #                     label_name=labels[1], legend=True)
+    #     add_one_var_fig(fig3, ax3, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_avgdist)[res], yerr=np.array(obj1.std_avgdist)[res], xscale=xscale,
+    #                     yscale=10 ** 3, color="red", label_name=labels[1], legend=True)
+    #     add_one_var_fig(fig4, ax4, np.array(obj1.spontnoise[0])[res], np.array(obj1.avg_snrdb)[res], yerr=np.array(obj1.std_snrdb)[res], xscale=xscale, color="red",
+    #                     label_name=labels[1], legend=True)
+    #
+    # if isinstance(fname2, str):
+    #     add_one_var_fig(fig1, ax1, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgcc)[res], yerr=np.array(obj2.std_avgcc)[res], xscale=xscale, color="blue",
+    #                     label_name=labels[2], legend=True)
+    #     add_one_var_fig(fig2, ax2, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgre)[res], yerr=np.array(obj2.std_avgre)[res], xscale=xscale, color="blue",
+    #                     label_name=labels[2], legend=True)
+    #     add_one_var_fig(fig3, ax3, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_avgdist)[res], yerr=np.array(obj2.std_avgdist)[res], xscale=xscale,
+    #                     yscale=10 ** 3, color="blue", label_name=labels[2], legend=True)
+    #     add_one_var_fig(fig4, ax4, np.array(obj2.spontnoise[0])[res], np.array(obj2.avg_snrdb)[res], yerr=np.array(obj2.std_snrdb)[res], xscale=xscale, color="blue",
+    #                     label_name=labels[2], legend=True)
+    #
+    # if isinstance(fname3, str):
+    #     add_one_var_fig(fig1, ax1, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgcc)[res], yerr=np.array(obj3.std_avgcc)[res], xscale=xscale, color="green",
+    #                     label_name=labels[3], legend=True)
+    #     add_one_var_fig(fig2, ax2, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgre)[res], yerr=np.array(obj3.std_avgre)[res], xscale=xscale, color="green",
+    #                     label_name=labels[3], legend=True)
+    #     add_one_var_fig(fig3, ax3, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_avgdist)[res], yerr=np.array(obj3.std_avgdist)[res], xscale=xscale,
+    #                     yscale=10 ** 3, color="green", label_name=labels[3], legend=True)
+    #     add_one_var_fig(fig4, ax4, np.array(obj3.spontnoise[0])[res], np.array(obj3.avg_snrdb)[res], yerr=np.array(obj3.std_snrdb)[res], xscale=xscale, color="green",
+    #                     label_name=labels[3], legend=True)
+    #
+    # if isinstance(fname4, str):
+    #     add_one_var_fig(fig1, ax1, obj4.spontnoise[0], obj4.avg_avgcc, yerr=obj4.std_avgcc, xscale=xscale, color="cyan",
+    #                     label_name=labels[4], legend=True)
+    #     add_one_var_fig(fig2, ax2, obj4.spontnoise[0], obj4.avg_avgre, yerr=obj4.std_avgre, xscale=xscale, color="cyan",
+    #                     label_name=labels[4], legend=True)
+    #     add_one_var_fig(fig3, ax3, obj4.spontnoise[0], obj4.avg_avgdist, yerr=obj4.std_avgdist, xscale=xscale,
+    #                     yscale=10 ** 3, color="cyan", label_name=labels[4], legend=True)
+    #     add_one_var_fig(fig4, ax4, obj4.spontnoise[0], obj4.avg_snrdb, yerr=obj4.std_snrdb, xscale=xscale, color="cyan",
+    #                     label_name=labels[4], legend=True)
+    #
+    # if isinstance(fname5, str):
+    #     add_one_var_fig(fig1, ax1, obj5.spontnoise[0], obj5.avg_avgcc, yerr=obj5.std_avgcc, xscale=xscale, color="pink",
+    #                     label_name=labels[5], legend=True)
+    #     add_one_var_fig(fig2, ax2, obj5.spontnoise[0], obj5.avg_avgre, yerr=obj5.std_avgre, xscale=xscale, color="pink",
+    #                     label_name=labels[5], legend=True)
+    #     add_one_var_fig(fig3, ax3, obj5.spontnoise[0], obj5.avg_avgdist, yerr=obj5.std_avgdist, xscale=xscale,
+    #                     yscale=10 ** 3, color="pink", label_name=labels[5], legend=True)
+    #     add_one_var_fig(fig4, ax4, obj5.spontnoise[0], obj5.avg_snrdb, yerr=obj5.std_snrdb, xscale=xscale, color="pink",
+    #                     label_name=labels[5], legend=True)
+    #
+    # fig1.savefig(fname[:-4] + "-noisestr-cc.png", dpi=300)
+    # fig2.savefig(fname[:-4] + "-noisestr-re.png", dpi=300)
+    # fig3.savefig(fname[:-4] + "-noisestr-dist.png", dpi=300)
+    # fig4.savefig(fname[:-4] + "-noisestr-snrdb.png", dpi=300)
+    #
+    # plt.show()
+
+    return fig, ax
 
 
 class AvgStatistics:
@@ -1501,7 +1792,7 @@ def read_obj(file_path):
 
 
 def plot_one_var(x, y, yerr=[], xname="", yname="", show=False, xscale=1, yscale=1, savefig=False, label_name=None,
-                 legend=False, font_size=14):
+                 legend=False, font_size=14, marker='o'):
     import matplotlib.pyplot as plt
     import matplotlib.font_manager
 
@@ -1520,7 +1811,7 @@ def plot_one_var(x, y, yerr=[], xname="", yname="", show=False, xscale=1, yscale
     x = xscale * np.array(x)
     y = yscale * np.array(y)
 
-    ax.plot(x, y, linestyle='-', linewidth=2, c="black", markersize=5, marker="o", label=label_name)
+    ax.plot(x, y, linestyle='-', linewidth=2, c="black", markersize=7, marker=marker, label=label_name)
     if legend:
         ax.legend(fontsize=font_size)
     if len(yerr) > 0:
@@ -1543,12 +1834,12 @@ def plot_one_var(x, y, yerr=[], xname="", yname="", show=False, xscale=1, yscale
 
 
 def add_one_var_fig(fig, ax, x, y, yerr=[], show=False, xscale=1, yscale=1, savefig=False, color="black",
-                    label_name=None, legend=False, font_size=14):
+                    label_name=None, legend=False, font_size=14, marker="o"):
     import matplotlib.pyplot as plt
 
     x = float(xscale) * np.array(x)
     y = yscale * y
-    ax.plot(x, y, linestyle='-', linewidth=2, c=color, markersize=5, marker="o", label=label_name)
+    ax.plot(x, y, linestyle='-', linewidth=2, c=color, markersize=7, marker=marker, label=label_name)
 
     if len(yerr) > 0:
         yerr_temp = [yscale * i for i in yerr]
@@ -1563,7 +1854,7 @@ def add_one_var_fig(fig, ax, x, y, yerr=[], show=False, xscale=1, yscale=1, save
     if isinstance(savefig, str):
         fig.savefig(savefig)
 
-    return fig
+    return fig, ax
 
 
 if __name__ == '__main__':
