@@ -43,45 +43,42 @@ def main():
 
     # simulate("simulate2508-squid1.obj", system_glob="SQUID", magnetometer_type=1, n_jobs=1)
 
-    simulate("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], rand_dir=1, n_jobs=1)
+    simulate("test.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], rand_dir=1,
+             n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
     # simulate("simulate2708-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"], n_jobs=1)
     # simulate("simulate2508-squid1.obj", system_glob="SQUID", magnetometer_type=1, n_jobs=1)
 
     # test("simulate1911-radtan.obj")
 
     # test_dip_dist()
-    # save_sourcespace()
+
+    # simulate("simulate0902-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"],
+    #          rand_dir=1, n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate0902-rad.obj", system_glob="OPM", magnetometer_type=1, components=["rad"], rand_dir=1,
+    #          n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate0902-tan.obj", system_glob="OPM", magnetometer_type=1, components=["tan"], rand_dir=1,
+    #          n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate0902-ver.obj", system_glob="OPM", magnetometer_type=1, components=["ver"], rand_dir=1,
+    #          n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    #
+    # simulate("simulate0902-squid2-std.obj", system_glob="SQUID", magnetometer_type=2, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate0902-squid5-std.obj", system_glob="SQUID", magnetometer_type=5, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate0902-squid6-std.obj", system_glob="SQUID", magnetometer_type=6, mindist_g=0.01, maxdist_g=0.06)
+
+    # simulate("simulate1102-all.obj", system_glob="OPM", magnetometer_type=1, components=["rad", "tan", "ver"],
+    #          rand_dir=1, n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate1102-rad.obj", system_glob="OPM", magnetometer_type=1, components=["rad"], rand_dir=1,
+    #          n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate1102-tan.obj", system_glob="OPM", magnetometer_type=1, components=["tan"], rand_dir=1,
+    #          n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate1102-ver.obj", system_glob="OPM", magnetometer_type=1, components=["ver"], rand_dir=1,
+    #          n_jobs=1, mindist_g=0.01, maxdist_g=0.06)
+    #
+    # simulate("simulate1102-squid2-std.obj", system_glob="SQUID", magnetometer_type=2, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate1102-squid5-std.obj", system_glob="SQUID", magnetometer_type=5, mindist_g=0.01, maxdist_g=0.06)
+    # simulate("simulate1102-squid6-std.obj", system_glob="SQUID", magnetometer_type=6, mindist_g=0.01, maxdist_g=0.06)
 
     return
-
-
-def save_sourcespace():
-    import numpy
-    data_path = 'data/'
-    freesurfer_path = data_path + '/subjects/'
-
-    subjects = ["tisa", "urma", "daha", "kasc", "anjo", "peho", "miwl", "taya"]
-
-    name = "voja"
-
-    src_path = data_path + '/MNE/' + name + '-oct6-src.fif'
-    src = mne.read_source_spaces(src_path)
-
-    np.savetxt("rr_voja_1.txt", src[0]['rr'], fmt='%.5f')
-    np.savetxt("rr_voja_2.txt", src[1]['rr'], fmt='%.5f')
-
-    np.savetxt("nn_voja_1.txt", src[0]['nn'], fmt='%.5f')
-    np.savetxt("nn_voja_2.txt", src[1]['nn'], fmt='%.5f')
-
-    np.savetxt("tris_voja_1.txt", src[0]['tris'], fmt='%i')
-    np.savetxt("tris_voja_2.txt", src[1]['tris'], fmt='%i')
-
-    np.savetxt("vertno_voja_1.txt", src[0]['vertno'], fmt='%i')
-    np.savetxt("vertno_voja_2.txt", src[1]['vertno'], fmt='%i')
-
-
-    return
-
 
 def test_dip_dist():
     data_path = 'data/'
@@ -135,6 +132,7 @@ def leave_opm_sensors_intersect(evoked, leave_out, components):
 
 def plot_srcspace(src, subject, subjects_dir, trans):
     lh = src[0]
+    rh = src[1]
     verts = lh['rr']  # The vertices of the source space
     tris = lh['tris']
     dip_pos = lh['rr'][lh['vertno']]  # The position of the dipoles
@@ -145,6 +143,22 @@ def plot_srcspace(src, subject, subjects_dir, trans):
     actual_amp = np.ones(dip_len)  # misc amp to create Dipole instance
     actual_gof = np.ones(dip_len)  # misc GOF to create Dipole instance
     dipoles = mne.Dipole(dip_times, dip_pos, actual_amp, dip_ori, actual_gof)
+
+
+    dip_pos2 = rh['rr'][rh['vertno']]  # The position of the dipoles
+    dip_ori2 = rh['nn'][rh['vertno']]
+    dip_len2 = len(dip_pos2)
+    dip_times2 = [0]
+    white = (1.0, 1.0, 1.0)
+    actual_amp2 = np.ones(dip_len2)  # misc amp to create Dipole instance
+    actual_gof2 = np.ones(dip_len2)  # misc GOF to create Dipole instance
+    dipoles2 = mne.Dipole(dip_times2, dip_pos2, actual_amp2, dip_ori2, actual_gof2)
+    # dip_pos = np.shape(np.vstack((dip_pos1, dip_pos2)))
+    # dip_ori = np.shape(np.vstack((dip_ori1, dip_ori2)))
+
+
+
+
     # trans = mne.read_trans(trans_fname)
     fig = mne.viz.create_3d_figure(size=(600, 400), bgcolor=white)
     coord_frame = 'mri'
@@ -157,16 +171,22 @@ def plot_srcspace(src, subject, subjects_dir, trans):
     # Mark the position of the dipoles with small red dots
     mne.viz.plot_dipole_locations(
         dipoles=dipoles, trans=trans, mode='sphere', subject=subject,
-        subjects_dir=subjects_dir, coord_frame=coord_frame, scale=9e-4, fig=fig)
+        subjects_dir=subjects_dir, coord_frame=coord_frame, scale=7e-4, fig=fig)
+
+    # Mark the position of the dipoles with small red dots
+    mne.viz.plot_dipole_locations(
+        dipoles=dipoles2, trans=trans, mode='sphere', subject=subject,
+        subjects_dir=subjects_dir, coord_frame=coord_frame, scale=7e-4, fig=fig)
 
     mne.viz.set_3d_view(figure=fig, azimuth=0, distance=0.25)
+
 
     return
 
 
 def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, position="both", gen12=1,
                                no_noises=1, components=["rad", "tan", "ver"], bem=None, src=None, rand_dir=1,
-                               leave_out=1):
+                               leave_out=1, mindist=0, maxdist=0):
     import mne
     import matplotlib.pyplot as plt
     import megtools.meg_plot as mplo
@@ -214,7 +234,8 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 
     times = np.arange(no_noises, dtype=float) * 0.02
     max_dip = 100.0 * 10 ** (-9)
-    dip_loc, dip_str = generate_dip(src, times, max_dip, rand_dir=rand_dir, mindist=0.04, maxdist=0.06, fname_bem=bem)
+    dip_loc, dip_str = generate_dip(src, times, max_dip, rand_dir=rand_dir, maxdist=maxdist, mindist=mindist,
+                                    fname_bem=bem)
 
     # plot_dipoles(xyz,dip_loc,subject_dir, name)
     dip = mne.Dipole(np.array(times), dip_loc[:, 0:3], dip_str, dip_loc[:, 3:6], 1)
@@ -250,7 +271,7 @@ def simulate_aef_opm_mnepython(standard_path, block_name_opm, subject_dir, posit
 
 def simulate_aef_squid_mnepython(standard_path, block_name_squid, subject_dir, position="both",
                                  magnetometer_type=1, noisy_ecds=0, noise_ratio=0.1, no_noises=1, src=None, bem=None,
-                                 rand_dir=1):
+                                 rand_dir=1, mindist=0, maxdist=0):
     # magnetometer_type: 1(axial gradiometer), 2(radial magnetometer), 3(planar gradiometer #1),
     # 4(planar gradiometer #2), 5(tangential magnetometer #1), 6(tangential magnetometer #2)
     import mne
@@ -319,7 +340,7 @@ def simulate_aef_squid_mnepython(standard_path, block_name_squid, subject_dir, p
 
     max_dip = 100.0 * 10 ** (-9)
 
-    dip_loc, dip_str = generate_dip(src, times, max_dip, rand_dir=rand_dir)
+    dip_loc, dip_str = generate_dip(src, times, max_dip, rand_dir=rand_dir, maxdist=maxdist, mindist=mindist, fname_bem=bem)
 
     # plot_dipoles(xyz,dip_loc,subject_dir, name)
 
@@ -355,7 +376,7 @@ def simulate_aef_squid_mnepython(standard_path, block_name_squid, subject_dir, p
 
 
 def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "ver"], magnetometer_type=1, bem=None,
-             rand_dir=1, n_jobs=1):
+             rand_dir=1, n_jobs=1, mindist_g=0.0, maxdist_g=0.0):
     data_path = 'data/'
     freesurfer_path = data_path + '/subjects/'
 
@@ -433,6 +454,9 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
         #     noise_std = noise_std_base * ii
         # for ii in range(22, 0, -3):  # CAN ALSO BE SNR
         #     noise_std = float(ii)
+        dist_step=0.01
+        mindists = np.arange(mindist_g, maxdist_g, dist_step)
+
         for ii in range(0, 25, 25):
         # for ii in range(0, 200, 25):
         # for ii in range(0, 400, 25):
@@ -441,80 +465,85 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
             noise_std = float(ii) * 1.0 * 10 ** (-15)
             # for iii in range(0, 8, 1):
             for iii in range(3, 4, 1):
-                spont_nois_dip = float(iii) * 1.0 * 10 ** (-9)
-                print("current: " + name + ", random noise: " + str(noise_std) + ", spon. noise: " + str(spont_nois_dip))
+            # for iii in range(0, 1, 1):
+                for mindist in mindists:
+                    maxdist = mindist + dist_step
+                    spont_nois_dip = float(iii) * 1.0 * 10 ** (-9)
+                    print("current: " + name + ", random noise: " + str(noise_std) + ", spon. noise: " + str(spont_nois_dip))
 
-                if continue_session:
-                    if noise_std in avg_stat.noisestr[j] and spont_nois_dip in avg_stat.spontnoise[j]:
-                        break
+                    if continue_session:
+                        if noise_std in avg_stat.noisestr[j] and spont_nois_dip in avg_stat.spontnoise[j]:
+                            break
 
-                if system_glob == "SQUID":
-                    evoked_opm, dip_sim = simulate_aef_squid_mnepython(data_path, block_name_squid,
-                                                                       freesurfer_path,
-                                                                       position=pos,
-                                                                       magnetometer_type=magnetometer_type,
-                                                                       no_noises=number_of_noises, bem=bem, src=src,
-                                                                       rand_dir=rand_dir)
+                    if system_glob == "SQUID":
+                        evoked_opm, dip_sim = simulate_aef_squid_mnepython(data_path, block_name_squid,
+                                                                           freesurfer_path,
+                                                                           position=pos,
+                                                                           magnetometer_type=magnetometer_type,
+                                                                           no_noises=number_of_noises, bem=bem, src=src,
+                                                                           rand_dir=rand_dir, mindist=mindist,
+                                                                           maxdist=maxdist)
 
-                else:
-                    evoked_opm, dip_sim = simulate_aef_opm_mnepython(data_path, block_name_opm, freesurfer_path,
-                                                                     position=pos, gen12=gen12s[j],
-                                                                     no_noises=number_of_noises,
-                                                                     components=components, bem=bem, src=src,
-                                                                     rand_dir=rand_dir)
+                    else:
+                        evoked_opm, dip_sim = simulate_aef_opm_mnepython(data_path, block_name_opm, freesurfer_path,
+                                                                         position=pos, gen12=gen12s[j],
+                                                                         no_noises=number_of_noises,
+                                                                         components=components, bem=bem, src=src,
+                                                                         rand_dir=rand_dir, mindist=mindist,
+                                                                         maxdist=maxdist)
 
-                evoked_opm_noised, random_noises = add_noise_random(evoked_opm, noise_std)
-                # evoked_opm_noised, random_noises = add_noise_random_str(evoked_opm, noise_std)
+                    evoked_opm_noised, random_noises = add_noise_random(evoked_opm, noise_std)
+                    # evoked_opm_noised, random_noises = add_noise_random_str(evoked_opm, noise_std)
 
-                evoked_opm_noised2, spont_noises = add_noise_spontanous(evoked_opm_noised, spont_nois_dip,
-                                                                        evoked_opm.times,
-                                                                        data_path, name, bem=bem, src=src)
-                # import matplotlib.pyplot as plt
-                # plot_evokedobj_topo_v3(evoked_opm, "", block_name_opm, "OPM", 0.0, freesurfer_path)
-                # plt.savefig("unonoised.png")
-                #
-                # plot_evokedobj_topo_v3(random_noises, "", block_name_opm, "OPM", 0.0, freesurfer_path)
-                # plt.savefig("random_noises.png")
-                #
-                # plot_evokedobj_topo_v3(spont_noises, "", block_name_opm, "OPM", 0.0, freesurfer_path)
-                # plt.savefig("spont_noises.png")
-
-                # plt.show()
-
-                steps = np.linspace(1, 0, 11)[1:11]
-                for step in steps:
-                    no_sensors = int(step * len(evoked_opm_noised2.ch_names) / len(components))
-                    evoked_opm_noised3 = leave_opm_sensors_intersect(evoked_opm_noised2.copy(),
-                                                                     leave_out=no_sensors, components=components)
-
-                    # plot_magnetometers21(freesurfer_path, name, evoked_opm_noised3, "opm")
-
+                    evoked_opm_noised2, spont_noises = add_noise_spontanous(evoked_opm_noised, spont_nois_dip,
+                                                                            evoked_opm.times,
+                                                                            data_path, name, bem=bem, src=src)
                     # import matplotlib.pyplot as plt
                     # plot_evokedobj_topo_v3(evoked_opm, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                    # plt.savefig("unonoised.png")
+                    #
+                    # plot_evokedobj_topo_v3(random_noises, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                    # plt.savefig("random_noises.png")
+                    #
+                    # plot_evokedobj_topo_v3(spont_noises, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                    # plt.savefig("spont_noises.png")
+
                     # plt.show()
 
-                    # plot_evokedobj_topo_v3(evoked_opm_noised2, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
-                    # plot_evokedobj_topo(evoked_opm_noised2, "", block_name_squid, "SQUID", 0.0)
-                    # plt.savefig("system4.png")
-                    # plt.show()
+                    # steps = np.linspace(1, 0, 11)[1:11]
+                    # for step in steps:
+                    #     no_sensors = int(step * len(evoked_opm_noised2.ch_names) / len(components))
+                    #     evoked_opm_noised3 = leave_opm_sensors_intersect(evoked_opm_noised2.copy(),
+                    #                                                      leave_out=no_sensors, components=components)
 
-                    fit_dip_opm, recon_field_opm = localize_dip(evoked_opm_noised3, data_path, name, bem=bem, n_jobs=n_jobs)
+                        # plot_magnetometers21(freesurfer_path, name, evoked_opm_noised3, "opm")
+
+                        # import matplotlib.pyplot as plt
+                        # plot_evokedobj_topo_v3(evoked_opm, "", block_name_opm, "OPM", 0.0, freesurfer_path)
+                        # plt.show()
+
+                        # plot_evokedobj_topo_v3(evoked_opm_noised2, standard_path, block_name_opm, "OPM", 0.0, freesurfer_path)
+                        # plot_evokedobj_topo(evoked_opm_noised2, "", block_name_squid, "SQUID", 0.0)
+                        # plt.savefig("system4.png")
+                        # plt.show()
+
+                    fit_dip_opm, recon_field_opm = localize_dip(evoked_opm_noised2, data_path, name, bem=bem, n_jobs=n_jobs)
 
                     dist, avg_dist = dipole_distance(dip_sim, fit_dip_opm)
-                    rel_err, corr_coeff, rel_err_avg, corr_coeff_avg = recc_two_evoked(evoked_opm_noised3, recon_field_opm)
+                    rel_err, corr_coeff, rel_err_avg, corr_coeff_avg = recc_two_evoked(evoked_opm_noised2, recon_field_opm)
                     SNR_db_avgs, SNR_avgs, rms_signal, rms_noise = estimate_snr(evoked_opm, [random_noises, spont_noises])
 
-                    # avg_dist = random.random()
-                    # rel_err_avg = random.random()
-                    # corr_coeff_avg = random.random()
-                    # SNR_avgs = random.random()
-                    # SNR_db_avgs = random.random()
-                    #
-                    # dist = np.random.random_sample(number_of_noises)
-                    # rel_err = np.random.random_sample(number_of_noises)
-                    # corr_coeff = np.random.random_sample(number_of_noises)
-                    # SNR = np.random.random_sample(number_of_noises)
-                    # SNR_db = np.random.random_sample(number_of_noises)
+                        # avg_dist = random.random()
+                        # rel_err_avg = random.random()
+                        # corr_coeff_avg = random.random()
+                        # SNR_avgs = random.random()
+                        # SNR_db_avgs = random.random()
+                        #
+                        # dist = np.random.random_sample(number_of_noises)
+                        # rel_err = np.random.random_sample(number_of_noises)
+                        # corr_coeff = np.random.random_sample(number_of_noises)
+                        # SNR = np.random.random_sample(number_of_noises)
+                        # SNR_db = np.random.random_sample(number_of_noises)
 
                     avg_stat.add_avgdist(avg_dist, j)
                     avg_stat.add_avgre(rel_err_avg, j)
@@ -522,7 +551,7 @@ def simulate(filename="default", system_glob="OPM", components=["rad", "tan", "v
                     avg_stat.add_avgsnr(SNR_avgs, j)
                     avg_stat.add_avgsnrdb(SNR_db_avgs, j)
 
-                    avg_stat.add_sensno(step, j)
+                    avg_stat.add_sensno((maxdist+mindist)/2, j) #I WILL USE THIS FOR DEPTH
                     avg_stat.add_spontnoise(spont_nois_dip, j)
                     avg_stat.add_noisestr(noise_std, j)
 
@@ -1500,7 +1529,6 @@ def generate_dip(src, times, max_dip, rand_dir=1, rand_dip=1, mindist=0, maxdist
         bem = mne.read_bem_solution(fname_bem)
         surf_rr = bem['surfs'][0]['rr']
 
-
     for i, j in enumerate(times):
         continue_ind = True
         while continue_ind:
@@ -1515,9 +1543,10 @@ def generate_dip(src, times, max_dip, rand_dir=1, rand_dip=1, mindist=0, maxdist
 
             if mindist!=0 or maxdist!=0:
                 dist = min(vfun.check_nearest_neighbours(surf_rr, src[rand_hemi]["rr"][rand]))
-
-            if dist>mindist and dist<maxdist:
-                continue_ind=False
+                if dist > mindist and dist < maxdist:
+                    continue_ind = False
+            else:
+                continue_ind = False
 
     return dip, dip_str
 
@@ -1527,6 +1556,14 @@ def generate_dip_dist(src, bem):
     import numpy as np
     import megtools.vector_functions as vfun
     import matplotlib.pyplot as plt
+    import matplotlib.font_manager
+
+    plt.rcParams.update({
+        "text.usetex": True,
+        "font.family": "serif",
+        "font.serif": ["Palatino"],
+    })
+
 
     rr1 = src[0]["rr"]
     rr2 = src[1]["rr"]
@@ -1539,6 +1576,8 @@ def generate_dip_dist(src, bem):
         dists.append(min(vfun.check_nearest_neighbours(surf_rr, i)))
 
     counts, edges, plot = plt.hist(dists, bins=[0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08])
+    plt.xlabel("$h \mathrm{[m]}$", fontsize=14)
+    plt.ylabel("$\mathrm{count}$", fontsize=14)
     plt.show()
     print(counts)
     print(counts[0])  # first bin

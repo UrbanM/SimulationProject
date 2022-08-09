@@ -114,14 +114,23 @@ def main():
     #           "OPM-NOR", "OPM-TAN-LAT", "OPM-TAN-LON", "OPM-ALL"])
 
     # FIGURE reduced sensor count (NEW FIG9)
-    # figure_reduced_sens(name="simulate0301")
+    # figure_reduced_sens(name="simulate0301",yrange=[0,40])
 
     # FIGURE reduced sensor count (NEW FIG9B)
-    figure_reduced_sens(name="simulate2601")
+    figure_reduced_sens(name="simulate2601", yrange=[0,40])
+
+    # FIGURE different depths (NEW FIG10)
+    # figure_depths(name="simulate0902", exportname="simulate0902-depths-rms", yattr="rms_signal")
+    # figure_depths(name="simulate0902", exportname="simulate0902-depths-d", yattr="avg_avgdist")
+    # figure_depths(name="simulate0902", exportname="simulate0902-depths-SNR", yattr="avg_snrdb")
+
+    # figure_depths(name="simulate1102", exportname="simulate1102-depths-rms", yattr="rms_signal")
+    # figure_depths(name="simulate1102", exportname="simulate1102-depths-d", yattr="avg_avgdist")
+    # figure_depths(name="simulate1102", exportname="simulate1102-depths-SNR", yattr="avg_snrdb")
 
     return
 
-def figure_reduced_sens(name):
+def figure_reduced_sens(name, yrange=None):
     import matplotlib.pyplot as plt
     yattr = "avg_avgdist"
     xattr = "sensno"
@@ -153,9 +162,86 @@ def figure_reduced_sens(name):
                       color="purple", label="OPM-NOR,TAN-LON", yscale=yscale, xscale=xscale, marker="D")
     visualize_uniform(name + "-tanver.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
                       color="brown", label="OPM-TAN-LAT,LON", yscale=yscale, xscale=xscale, marker="*")
+
+    if yrange is not None:
+        plt.ylim(yrange[0], yrange[1])
     plt.savefig(name+"-reducedsens.png", dpi=300)
+
+    figlegend = plt.figure(figsize=(12, 1))
+    axl = figlegend.add_subplot(111)
+    plt.figlegend(*ax.get_legend_handles_labels(), loc='center', ncol=3, prop={'size': 15})
+    axl.set_axis_off()
+    figlegend.savefig(name+"-reducedsens-scale-new.png", dpi=300)
+
     plt.show()
 
+    return
+
+
+def figure_depths(name, exportname, yattr = "avg_avgdist", xattr = "sensno"):
+    import matplotlib.pyplot as plt
+
+    if yattr == "avg_avgdist":
+        xscale = 10.0 ** 2
+        yscale = 10.0 ** 3
+        yname = "$d_{\mathrm{s,f}} \mathrm{[mm]}$"
+        xname = "$h \mathrm{[cm]}$"
+        yerrattr = "std_avgdist"
+
+    if yattr == "rms_signal":
+        xscale = 10.0 ** 2
+        yscale = 10.0 ** (15)
+        yname = "$\overline{\mathrm{RMS_{signal}}} \mathrm{[fT]}$"
+        xname = "$h \mathrm{[cm]}$"
+        yerrattr = None
+
+    if yattr == "avg_snrdb":
+        xscale = 10.0 ** 2
+        yscale = 1
+        yname = "$\mathrm{SNR} \mathrm{[dB]}$"
+        xname = "$h \mathrm{[cm]}$"
+        yerrattr = "std_snrdb"
+
+    # #yattr = "avg_avgdist"
+    # xattr = "sensno"
+    # # yerrattr = "std_avgdist"
+    # xscale = 10.0**2
+    # yscale = 10.0 ** 3
+    # yname = "$d_{\mathrm{s,f}} \mathrm{[mm]}$"
+
+    # yattr = "avg_avgcc"
+    # xattr = "sensno"
+    # yerrattr = "std_avgcc"
+    # xscale = 10.0**2
+    # yscale = 1
+    # yname = "CC"
+
+    fig, ax = visualize_uniform(name + "-rad.obj", yattr, xattr, yerr_attr=yerrattr, label="OPM-NOR",
+                                yname=yname, yscale=yscale, xscale=xscale,
+                                xname=xname, marker="X")
+    visualize_uniform(name + "-tan.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="r", label="OPM-TAN-LAT", yscale=yscale, xscale=xscale, marker="s")
+    visualize_uniform(name + "-ver.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="g", label="OPM-TAN-LON", yscale=yscale, xscale=xscale, marker="o")
+    visualize_uniform(name + "-all.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="b", label="OPM-ALL", yscale=yscale, xscale=xscale, marker="^")
+
+    visualize_uniform(name + "-squid2.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="orange", label="SQUID-NOR", yscale=yscale, xscale=xscale, marker="P")
+    visualize_uniform(name + "-squid5.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="purple", label="SQUID-TAN-LAT", yscale=yscale, xscale=xscale, marker="D")
+    visualize_uniform(name + "-squid6.obj", yattr, xattr, yerr_attr=yerrattr, fig=fig, ax=ax,
+                      color="brown", label="SQUID-TAN-LON", yscale=yscale, xscale=xscale, marker="*")
+
+    plt.savefig(exportname + ".png", dpi=300)
+
+    figlegend = plt.figure(figsize=(12, 1))
+    axl = figlegend.add_subplot(111)
+    plt.figlegend(*ax.get_legend_handles_labels(), loc='center', ncol=3, prop={'size': 15})
+    axl.set_axis_off()
+    figlegend.savefig(exportname + "-legend.png", dpi=300)
+
+    plt.show()
 
     return
 
@@ -1429,7 +1515,7 @@ def visualize5(fname, fname1=None, fname2=None, fname3=None, fname4=None, fname5
     fig3.savefig(fname[:-4] + "-noisestr-dist-combined.png", dpi=300)
     fig4.savefig(fname[:-4] + "-noisestr-snrdb-combined.png", dpi=300)
 
-    figlegend.savefig(fname[:-4] + "simulation_legend_noisestr.png", dpi=300)
+    figlegend.savefig(fname[:-4] + "simulation_legend_noisestr-new.png", dpi=300)
 
     plt.show()
 
@@ -1526,20 +1612,28 @@ def visualize_uniform(fname, y_attr, x_attr, yerr_attr=None, fig=None, ax=None, 
     obj.calc_avgs()
     obj.calc_stds()
 
-    yval = getattr(obj, y_attr)
+    if y_attr == "rms_signal":
+        yval1 = np.average(getattr(obj, y_attr), axis=2)
+        yval = np.mean(yval1, axis=0)
+        yerrval = np.std(yval1, axis=0)
+
+    else:
+        yval = getattr(obj, y_attr)
+
+        if yerr_attr is not None:
+            yerrval = getattr(obj, yerr_attr)
+        else:
+            yerrval = []
+
     xval = getattr(obj, x_attr)[0]
 
-    if yerr_attr is not None:
-        yerrval = getattr(obj, yerr_attr)
-    else:
-        yerrval = []
 
     if fig is None and ax is None:
         fig, ax = plot_one_var(xval, yval, yerr=yerrval, xname=xname, yname=yname, xscale=xscale, yscale=yscale,
-                               label_name=label, legend=True,marker=marker)
+                               label_name=label, legend=False,marker=marker)
     else:
         fig, ax = add_one_var_fig(fig, ax, xval, yval, yerr=yerrval, xscale=xscale, yscale=yscale,
-                                  color=color, label_name=label, legend=True,marker=marker)
+                                  color=color, label_name=label, legend=False,marker=marker)
 
 
 
